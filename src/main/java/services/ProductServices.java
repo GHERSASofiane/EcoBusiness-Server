@@ -4,8 +4,8 @@ import java.util.Calendar;
 
 import com.google.gson.JsonObject;
 
+import DAO.ProductDAO;
 import converters.JSonConverter;
-import dao.ProductDAO;
 import models.Product;
 import models.Reservation;
 import status.Reponse;

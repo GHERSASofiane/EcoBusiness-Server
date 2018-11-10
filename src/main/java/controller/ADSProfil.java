@@ -14,6 +14,7 @@ import com.google.gson.JsonObject;
 
 import converters.JSonConverter;
 import helpers.Readers;
+import services.ProfilServices;
 import status.Reponse;
 
 /**
@@ -36,26 +37,14 @@ public class ADSProfil extends HttpServlet {
 
 		JsonObject jsObj = Readers.getJSONfromRequest(request);
 
-		models.Personne product = new models.Personne();
-		product = (models.Personne) JSonConverter.objectFromJson(jsObj, product);
-		product.setUserKey(GenerateKey());
+		models.Personne prof = new models.Personne();
+		prof = (models.Personne) JSonConverter.objectFromJson(jsObj, prof); 
 		
+		ProfilServices PrServ = new ProfilServices();
 		// Envoie de réponse
-		resp.println(JSonConverter.objectToJson(new Reponse("ok", product)));
+		resp.println(PrServ.Registration(prof));
 		resp.flush();
 	}
-	
-	private String GenerateKey() {
-		Random rand = new Random();
-		String alphabet = "0123456789azertyuiopmlkjhgfdsqwxcvbn";
-		String key ="";
-		int longueur = alphabet.length();
-		for(int i = 0; i < 50; i++) {
-		  int k = rand.nextInt(longueur);
-		  key = key.concat(""+alphabet.charAt(k));
-		}
-		
-		return key;
-	}
+
 	
 }

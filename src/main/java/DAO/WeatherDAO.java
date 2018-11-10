@@ -1,5 +1,5 @@
  
-package dao;
+package DAO;
 
 import configuration.Connexion;
 import java.net.URISyntaxException;

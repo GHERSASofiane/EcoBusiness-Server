@@ -6,8 +6,9 @@
 package services;
 
 import com.google.gson.JsonObject;
+
+import DAO.WeatherDAO;
 import converters.JSonConverter;
-import dao.WeatherDAO;
 
 /**
  *
