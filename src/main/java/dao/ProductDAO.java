@@ -71,8 +71,8 @@ public class ProductDAO {
 		try {
 			db = Connexion.getConnection();
 			String res = " INSERT INTO product(productname,productdescription,productprice,productpicture,productstatus,userid,productdate) VALUES('"
-					+ product.getProductName() + "','" + product.getProductDescription() + "',"
-					+ Integer.parseInt(product.getProductPrice()) + ",'" + product.getProductPicture() + "',0,"
+					+ product.getProductName() + "','" + product.getProductDescription() + "','"
+					+ product.getProductPrice() + "','" + product.getProductPicture() + "',0,"
 					+ product.getUserId() + ",'" + product.getProductDate() + "');";
 			
 			Statement statement = db.createStatement();
@@ -169,7 +169,7 @@ public class ProductDAO {
 			
 			db = Connexion.getConnection();
 			String query = " UPDATE product SET productname = '"+ product.getProductName() +"', productdescription = '"+ product.getProductDescription() +"', "
-					+ " productprice = '"+ Integer.parseInt(product.getProductPrice()) +"', productpicture   = '"+ product.getProductPicture() +"' "
+					+ " productprice = '"+ product.getProductPrice() +"', productpicture   = '"+ product.getProductPicture() +"' "
 							+ " WHERE ProductId = "+ product.getProductId() ;
 			
 			PreparedStatement preparedStmt = db.prepareStatement(query);	
@@ -215,7 +215,7 @@ public class ProductDAO {
 				tmpProd.setUserName(rs.getString("UserName"));
 				tmpProd.setUserMail(rs.getString("UserMail"));
 				tmpProd.setUserAdress(rs.getString("UserAdress"));
-				tmpProd.setUserPhone(rs.getInt("UserPhone"));
+				tmpProd.setUserPhone(rs.getString("UserPhone"));
 
 			}
 			db.close();
@@ -237,7 +237,7 @@ public class ProductDAO {
 		try {
 
 			db = Connexion.getConnection();
-			String query = "INSERT INTO Reservation(chatsend, chatreceive, chatproduct, chatmessage, reservationdate ) VALUES(?, ?, ?, ?, ? );";
+			String query = "INSERT INTO Request(RequestSend, RequestReceive, RequestProduct, RequestMessage, RequestDate ) VALUES(?, ?, ?, ?, ? );";
 			PreparedStatement preparedStmt = db.prepareStatement(query);
 			preparedStmt.setInt(1, reserv.getReservationSend());
 			preparedStmt.setInt(2, reserv.getReservationReceive());
@@ -273,7 +273,7 @@ public class ProductDAO {
 
 			Statement stmt = db.createStatement();
 			ResultSet rs = stmt
-					.executeQuery("SELECT * FROM Product, Reservation, Users WHERE Product.ProductId = Reservation.chatproduct AND Reservation.chatsend = Users.userid AND chatproduct = "
+					.executeQuery("SELECT * FROM Product, Request, Users WHERE Product.ProductId = Request.RequestProduct AND Request.RequestSend = Users.userid AND RequestProduct = "
 							+ productId + ";");
 			while (rs.next()) {
 
@@ -284,17 +284,18 @@ public class ProductDAO {
 				tmpProd.setProductId(rs.getInt("ProductId"));
 				tmpProd.setProductPrice(rs.getString("ProductPrice"));
 				tmpProd.setProductStatus(rs.getInt("ProductStatus"));
+				
 				tmpProd.setUserId(rs.getInt("UserId"));
 				tmpProd.setUserName(rs.getString("UserName"));
 				tmpProd.setUserMail(rs.getString("UserMail"));
 				tmpProd.setUserAdress(rs.getString("UserAdress"));
-				tmpProd.setUserPhone(rs.getInt("UserPhone"));
+				tmpProd.setUserPhone(rs.getString("UserPhone"));
 				 
-				tmpProd.setReservationDate(rs.getString("reservationdate") );
-				tmpProd.setReservationMessage(rs.getString("chatmessage") );
-				tmpProd.setReservationProduct(rs.getInt("chatproduct") );
-				tmpProd.setReservationReceive(rs.getInt("chatreceive") );
-				tmpProd.setReservationSend(rs.getInt("chatsend") );
+				tmpProd.setReservationDate(rs.getString("RequestDate") );
+				tmpProd.setReservationMessage(rs.getString("RequestMessage") );
+				tmpProd.setReservationProduct(rs.getInt("RequestProduct") );
+				tmpProd.setReservationReceive(rs.getInt("RequestReceive") );
+				tmpProd.setReservationSend(rs.getInt("RequestSend") );
 				
 				
 				TabRes.add(tmpProd);
@@ -330,13 +331,13 @@ public class ProductDAO {
 		preparedStmt.execute();
 		
 		// supprimer de la table reservation
-		String RDelete = "DELETE FROM Reservation WHERE chatproduct = ?;";
+		String RDelete = "DELETE FROM Request WHERE RequestProduct = ?;";
 		preparedStmt = db.prepareStatement(RDelete);
 		preparedStmt.setInt(1, reserv.getProductId());
 		preparedStmt.execute();
 		
 		// ajouter dans la table achat
-		String RInsert = "INSERT INTO Booking(bookingDated,productId,userId) VALUES(?,?,?);";
+		String RInsert = "INSERT INTO Booking(bookingDated,ProductId,UserId) VALUES(?,?,?);";
 		preparedStmt = db.prepareStatement(RInsert);
 		preparedStmt.setString(1, this.getDate());
 		preparedStmt.setInt(2, reserv.getProductId());

@@ -12,7 +12,7 @@ package models;
  */
 public class ProductDetail extends Product{
      String UserMail, UserAdress;
-     int UserPhone;
+     String UserPhone;
 
     public void setUserName(String UserName) {
         this.UserName = UserName;
@@ -26,8 +26,8 @@ public class ProductDetail extends Product{
         this.UserAdress = UserAdress;
     }
 
-    public void setUserPhone(int UserPhone) {
-        this.UserPhone = UserPhone;
+    public void setUserPhone(String string) {
+        this.UserPhone = string;
     }
 
     public String getUserName() {
@@ -42,7 +42,7 @@ public class ProductDetail extends Product{
         return UserAdress;
     }
 
-    public int getUserPhone() {
+    public String getUserPhone() {
         return UserPhone;
     }
      
