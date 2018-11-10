@@ -13,10 +13,17 @@ public class Personne {
 	private String userAddress;
 	private String userPhone;
 	private String userPicture;
+	private String UserKey;
 
 	
 	
-	
+
+	public String getUserKey() {
+		return UserKey;
+	}
+	public void setUserKey(String Key) {
+		this.UserKey = Key;
+	}
 	public int getUserId() {
 		return userId;
 	}

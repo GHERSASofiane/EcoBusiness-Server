@@ -29,30 +29,32 @@
 	
 	<servlet>
 		<servlet-name>ReservationValidate</servlet-name>
-		<display-name>ReservationValidate</display-name>
-		<description></description>
+		<display-name>ReservationValidate</display-name> 
 		<servlet-class>controller.ReservationValidate</servlet-class>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>ReservationProduct</servlet-name>
-		<display-name>ReservationProduct</display-name>
-		<description></description>
+		<display-name>ReservationProduct</display-name> 
 		<servlet-class>controller.ReservationProduct</servlet-class>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>MyPubs</servlet-name>
-		<display-name>MyPubs</display-name>
-		<description></description>
+		<display-name>MyPubs</display-name> 
 		<servlet-class>controller.MyPubs</servlet-class>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>Weather</servlet-name>
-		<display-name>Weather</display-name>
-		<description></description>
+		<display-name>Weather</display-name> 
 		<servlet-class>controller.Weather</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>ADSProfil</servlet-name>
+		<display-name>ADSProfil</display-name> 
+		<servlet-class>controller.ADSProfil</servlet-class>
 	</servlet>
  
  <!-- *************************************************************************** -->
@@ -85,6 +87,11 @@
 	<servlet-mapping>
 		<servlet-name>Weather</servlet-name>
 		<url-pattern>/Weather</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>ADSProfil</servlet-name>
+		<url-pattern>/ADSProfil</url-pattern>
 	</servlet-mapping>
 	
 </web-app>
