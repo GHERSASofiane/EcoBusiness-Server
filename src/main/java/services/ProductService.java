@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 
 import converters.JSonConverter;
 import dao.ProductDAO;
-import models.Product;
 import status.Reponse;
   
 public class ProductService {

@@ -1,7 +1,5 @@
 package services;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.google.gson.JsonObject;
 
 import converters.JSonConverter;
