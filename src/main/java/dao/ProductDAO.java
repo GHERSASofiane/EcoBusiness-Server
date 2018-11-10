@@ -33,7 +33,7 @@ public class ProductDAO {
 
 			Statement stmt = db.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT * FROM Product, Users WHERE ProductStatus = 0 AND Product.UserId = Users.UserId AND ( ProductName LIKE '%"
+					"SELECT * FROM Product, Users WHERE ProductStatus = 0 AND Product.userid = Users.UserId AND ( ProductName LIKE '%"
 							+ nameArticle + "%' OR ProductDescription LIKE '%"+ nameArticle +"%' ) ORDER BY ProductDate DESC OFFSET " + (page * 10) + " LIMIT 10 ");
 
 			while (rs.next()) {
@@ -46,7 +46,7 @@ public class ProductDAO {
 				tmp.setProductId(rs.getInt("ProductId"));
 				tmp.setProductPrice(rs.getString("ProductPrice"));
 				tmp.setProductStatus(rs.getInt("ProductStatus"));
-				tmp.setUserId(rs.getInt("UserId"));
+				tmp.setUserId(rs.getInt("userid"));
 				tmp.setUserName(rs.getString("UserName"));
 
 				res.add(tmp);
