@@ -15,6 +15,10 @@ import helpers.Readers;
 import models.Reservation;
 import services.ProductServices; 
 
+/**
+ *
+ * @author Sofiane GHERSA
+ */
 public class ReservationValidate extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -23,6 +27,7 @@ public class ReservationValidate extends HttpServlet {
 		super();
 	}
 
+//	confermation d'une demande de reservation
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Récuperer le PrintWriter Pour envoyer la réponse

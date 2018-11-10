@@ -14,18 +14,21 @@ import converters.JSonConverter;
 import helpers.Readers;
 import models.Reservation;
 import services.ProductServices;
-import status.Reponse;
 
+/**
+ *
+ * @author Sofiane GHERSA
+ */
 
 public class ReservationProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
      
     public ReservationProduct() {
-        super();
-        // TODO Auto-generated constructor stub
+        super(); 
     }
-
+    
+//	recuperer les damandes de cette annance  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	       // Récuperer le PrintWriter Pour envoyer la réponse
         PrintWriter resp = response.getWriter();
@@ -43,6 +46,7 @@ public class ReservationProduct extends HttpServlet {
 		
 	}
 	
+//	ajouter une demande de reservation
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	       // Récuperer le PrintWriter Pour envoyer la réponse
      PrintWriter resp = response.getWriter();

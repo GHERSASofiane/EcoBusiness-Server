@@ -1,3 +1,4 @@
+// class pour mettre a jour les information d'une annance et recuperer les details de cette derniere
 package controller;
 
 import java.io.IOException;
@@ -15,14 +16,17 @@ import helpers.Readers;
 import models.Product;
 import services.ProductServices; 
 
-public class EditProduct  extends HttpServlet {
-	/**
-	 * 
-	 */
+/**
+ *
+ * @author Sofiane GHERSA
+ */
+public class EDProduct  extends HttpServlet {
+ 
 	private static final long serialVersionUID = 1L;
 
-	public EditProduct() { super(); }
+	public EDProduct() { super(); }
 	
+//	pour modifier une annance
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Récuperer le PrintWriter Pour envoyer la réponse
@@ -42,4 +46,24 @@ public class EditProduct  extends HttpServlet {
         
 	}
 	
+//	pour recuperer les details d'une annance
+	@Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Récuperer le PrintWriter Pour envoyer la réponse
+        PrintWriter resp = response.getWriter();
+
+        // recuperer les params
+        String ProductId = request.getParameter("ProductId");
+        if (ProductId == null) {
+            ProductId = "";
+        }
+        int p = Integer.parseInt(ProductId); 
+
+        // Préparer la répense
+        ProductServices rep = new ProductServices();
+        // Envoie de réponse
+        resp.println(rep.getProductDetails(p));
+        resp.flush();
+
+    }
 }

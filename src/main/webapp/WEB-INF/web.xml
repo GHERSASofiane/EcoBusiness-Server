@@ -15,187 +15,76 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<servlet>
+		<servlet-name>ADSProduct</servlet-name>
+		<display-name>ADSProduct</display-name>
+		<servlet-class>controller.ADSProduct</servlet-class>
+	</servlet>
 
 	<servlet>
-		<servlet-name>MyPubs</servlet-name>
-		<display-name>MyPubs</display-name>
-		<description></description>
-		<servlet-class>controller.MyPubs</servlet-class>
+		<servlet-name>EDProduct</servlet-name>
+		<display-name>EDProduct</display-name>
+		<servlet-class>controller.EDProduct</servlet-class>
 	</servlet>
-	<servlet>
-		<servlet-name>SignIn</servlet-name>
-		<display-name>SignIn</display-name>
-		<description></description>
-		<servlet-class>controller.SignIn</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>ProductSearch</servlet-name>
-		<display-name>ProductSearch</display-name>
-		<description></description>
-		<servlet-class>controller.ProductSearch</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>EditProduct</servlet-name>
-		<display-name>EditProduct</display-name>
-		<description></description>
-		<servlet-class>controller.EditProduct</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>ProductDetail</servlet-name>
-		<display-name>ProductDetail</display-name>
-		<description></description>
-		<servlet-class>controller.ProductDetail</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>AddProduct</servlet-name>
-		<display-name>AddProduct</display-name>
-		<description></description>
-		<servlet-class>controller.AddProduct</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>DeleteProduct</servlet-name>
-		<display-name>DeleteProduct</display-name>
-		<description></description>
-		<servlet-class>controller.DeleteProduct</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>SignUp</servlet-name>
-		<display-name>SignUp</display-name>
-		<description></description>
-		<servlet-class>controller.SignUp</servlet-class>
-	</servlet>
+	
 	<servlet>
 		<servlet-name>ReservationValidate</servlet-name>
 		<display-name>ReservationValidate</display-name>
 		<description></description>
 		<servlet-class>controller.ReservationValidate</servlet-class>
 	</servlet>
+	
 	<servlet>
 		<servlet-name>ReservationProduct</servlet-name>
 		<display-name>ReservationProduct</display-name>
 		<description></description>
 		<servlet-class>controller.ReservationProduct</servlet-class>
 	</servlet>
+	
 	<servlet>
-		<servlet-name>ValidateProduct</servlet-name>
-		<display-name>ValidateProduct</display-name>
+		<servlet-name>MyPubs</servlet-name>
+		<display-name>MyPubs</display-name>
 		<description></description>
-		<servlet-class>controller.ValidateProduct</servlet-class>
+		<servlet-class>controller.MyPubs</servlet-class>
 	</servlet>
-	<servlet>
-		<servlet-name>UserHome</servlet-name>
-		<display-name>UserHome</display-name>
-		<description></description>
-		<servlet-class>controller.UserHome</servlet-class>
-	</servlet>
+	
 	<servlet>
 		<servlet-name>Weather</servlet-name>
 		<display-name>Weather</display-name>
 		<description></description>
 		<servlet-class>controller.Weather</servlet-class>
 	</servlet>
-	<servlet>
-		<servlet-name>bookProduct</servlet-name>
-		<display-name>bookProduct</display-name>
-		<description></description>
-		<servlet-class>controller.bookProduct</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>CancelReservation</servlet-name>
-		<display-name>CancelReservation</display-name>
-		<description></description>
-		<servlet-class>controller.CancelReservation</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>EditProfile</servlet-name>
-		<display-name>EditProfile</display-name>
-		<description></description>
-		<servlet-class>controller.EditProfile</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>AllProductsController</servlet-name>
-		<display-name>AllProductsController</display-name>
-		<description></description>
-		<servlet-class>controller.AllProductsController</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>ComparePrice</servlet-name>
-		<display-name>ComparePrice</display-name>
-		<description></description>
-		<servlet-class>controller.ComparePrice</servlet-class>
-	</servlet>
-
-
+ 
+ <!-- *************************************************************************** -->
+ 
+ 
 	<servlet-mapping>
-		<servlet-name>ReservationValidate</servlet-name>
-		<url-pattern>/ReservationValidate</url-pattern>
+		<servlet-name>ADSProduct</servlet-name>
+		<url-pattern>/ADSProduct</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>EDProduct</servlet-name>
+		<url-pattern>/EDProduct</url-pattern>
+	</servlet-mapping>
+
 	<servlet-mapping>
 		<servlet-name>MyPubs</servlet-name>
 		<url-pattern>/MyPubs</url-pattern>
 	</servlet-mapping>
+	
 	<servlet-mapping>
-		<servlet-name>SignIn</servlet-name>
-		<url-pattern>/authen</url-pattern>
+		<servlet-name>ReservationValidate</servlet-name>
+		<url-pattern>/ReservationValidate</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>ProductSearch</servlet-name>
-		<url-pattern>/ProductSearch</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>ProductDetail</servlet-name>
-		<url-pattern>/ProductDetail</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>AddProduct</servlet-name>
-		<url-pattern>/AddProduct</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>EditProduct</servlet-name>
-		<url-pattern>/EditProduct</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>DeleteProduct</servlet-name>
-		<url-pattern>/DeleteProduct</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>SignUp</servlet-name>
-		<url-pattern>/signup</url-pattern>
-	</servlet-mapping>
+	
 	<servlet-mapping>
 		<servlet-name>ReservationProduct</servlet-name>
 		<url-pattern>/ReservationProduct</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>ValidateProduct</servlet-name>
-		<url-pattern>/ValidateProduct</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>UserHome</servlet-name>
-		<url-pattern>/userhome</url-pattern>
-	</servlet-mapping>
+	
 	<servlet-mapping>
 		<servlet-name>Weather</servlet-name>
 		<url-pattern>/Weather</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>bookProduct</servlet-name>
-		<url-pattern>/bookProduct</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>CancelReservation</servlet-name>
-		<url-pattern>/CancelReservation</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>EditProfile</servlet-name>
-		<url-pattern>/editprofile</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>AllProductsController</servlet-name>
-		<url-pattern>/products</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>ComparePrice</servlet-name>
-		<url-pattern>/compare</url-pattern>
-	</servlet-mapping>
+	
 </web-app>

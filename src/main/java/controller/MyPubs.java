@@ -10,14 +10,17 @@ import javax.servlet.http.HttpServletResponse;
  
 import services.ProductServices; 
 
+/**
+ *
+ * @author Sofiane GHERSA
+ */
 public class MyPubs extends HttpServlet{
-	/**
-	 * 
-	 */
+ 
 	private static final long serialVersionUID = 1L;
 
 	public MyPubs() { super(); }
 	
+//	recuperer les annances 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
         // Récuperer le PrintWriter Pour envoyer la réponse
