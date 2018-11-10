@@ -1,6 +1,10 @@
 package models;
  
 
+/**
+ *
+ * @author Sofiane GHERSA
+ */
 public class Reservation extends ProductDetail {
 	
 	public Integer ReservationSend, ReservationReceive, ReservationProduct;

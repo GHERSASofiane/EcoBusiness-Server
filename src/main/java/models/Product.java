@@ -1,5 +1,9 @@
 package models;
 
+/**
+ *
+ * @author Sofiane GHERSA
+ */
 public class Product {
 
     public String ProductName, ProductDate, ProductDescription, ProductPicture, UserName, ProductPrice;

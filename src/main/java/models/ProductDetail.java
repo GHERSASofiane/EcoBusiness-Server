@@ -5,9 +5,10 @@
  */
 package models;
 
+
 /**
  *
- * @author ghersa
+ * @author Sofiane GHERSA
  */
 public class ProductDetail extends Product{
      String UserMail, UserAdress;

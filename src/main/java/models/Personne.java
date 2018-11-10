@@ -1,5 +1,9 @@
 package models;
 
+/**
+ *
+ * @author Sofiane GHERSA
+ */
 public class Personne {
 
 	private int userId; 

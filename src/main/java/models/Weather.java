@@ -7,9 +7,8 @@ package models;
 
 /**
  *
- * @author GHERSA Sofiane
+ * @author Sofiane GHERSA
  */
-
 public class Weather {
     int WeatherId;
     String Dated, Degree, Description;

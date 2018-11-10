@@ -10,6 +10,10 @@ import models.Product;
 import models.Reservation;
 import status.Reponse;
 
+/**
+ *
+ * @author Sofiane GHERSA
+ */
 public class ProductServices {
 
 	ProductDAO pr = new ProductDAO();
@@ -142,10 +146,7 @@ public class ProductServices {
 		return JSonConverter.objectToJson(pr.ReservationValidate(reserv));
 	}
 	
-	// *******************************************
-
-
-
+ 
 
 // ****** fonction utiles
 

@@ -15,82 +15,15 @@ import java.util.List;
 import models.*;
 import status.Reponse;
 
+/**
+ *
+ * @author Sofiane GHERSA
+ */
 public class ProductDAO {
 
 	private Connection db;
-
-
-
-
-	public Reponse validateProduct(String productId) {
-
-		try {
-			db = Connexion.getConnection();
-			Statement pst = db.createStatement();
-
-			pst.executeQuery(" UPDATE Product Set productStatus = 2 WHERE productId = " + productId + ";");
-
-			pst.close();
-			db.close();
-
-		} catch (URISyntaxException e) {
-			return new Reponse("ko", "error !!! couldn't validate purchase");
-		} catch (SQLException e) {
-			return new Reponse("ko", "error !!! couldn't validate purchase");
-		}
-
-		return new Reponse("ok", "your purchase has been validated ");
-	}
-
-	public Reponse bookProduct(String productId, String productName) {
-		try {
-			db = Connexion.getConnection();
-			String req = "INSERT INTO Booking" + "(bookingDated,productId,userId) VALUES(?,?,?)";
-			PreparedStatement pst = db.prepareStatement(req);
-			pst.setString(1, "");
-			pst.setInt(2, Integer.parseInt(productId));
-			pst.setString(3, productName);
-
-			pst.executeUpdate();
-
-			pst.close();
-			db.close();
-
-		} catch (URISyntaxException e) {
-			return new Reponse("ko", "an error has occured");
-		} catch (SQLException e) {
-			return new Reponse("ko", "an error has occured");
-		}
-
-		return new Reponse("ok", "the product has been reserved");
-	}
-
-	public Object cancelReservation(String productId) {
-
-		try {
-			db = Connexion.getConnection();
-			Statement pst = db.createStatement();
-			Statement delete = db.createStatement();
-
-			pst.executeQuery(" UPDATE Product Set productStatus = 0 WHERE productId = " + productId + ";");
-			delete.executeQuery(" DELETE FROM Booking  WHERE productId = " + productId + ";");
-
-			delete.close();
-			pst.close();
-			db.close();
-
-		} catch (URISyntaxException e) {
-			return new Reponse("ko", "error !!! Can not cancel reservation");
-		} catch (SQLException e) {
-			return new Reponse("ko", "error !!! Can not cancel reservation");
-		}
-
-		return new Reponse("ok", "your booking has been canceled ");
-
-	}
-// ******  Function fin    ******************************
-
-	// recherche des annances 
+  
+// recherche des annances 
 	public Reponse searchProduct(String nameArticle, int page) {
 		List<Product> res = new ArrayList<Product>();
 		Product tmp;
@@ -132,7 +65,7 @@ public class ProductDAO {
 		return new Reponse("ok", res);
 	}
 
-	// ajouter une annance
+// ajouter une annance
 	public Reponse addProduct(Product product) {
 
 		try {
@@ -161,7 +94,7 @@ public class ProductDAO {
 
 	}
 
-	// recuperer les annaces publier
+// recuperer les annaces publier
 	public Reponse MyPubs(int id) {
 
 		List<Product> res = new ArrayList<Product>();
@@ -202,7 +135,7 @@ public class ProductDAO {
 		return new Reponse("ok", res);
 	}
 	
-	// Supprision d'une annance
+// Supprision d'une annance
 	public Reponse deleteProduct(int id) {
 		try {
 
@@ -229,7 +162,7 @@ public class ProductDAO {
 
 	}
 	
-	// Modifier une annance
+// Modifier une annance
 	public Reponse EditProduct(Product product) {
 
 		try {
@@ -257,7 +190,7 @@ public class ProductDAO {
 
 	}
 	
-	// recuperer les details d'une annance
+// recuperer les details d'une annance
 	public Reponse getProductDetails(Integer productId) {
 		
 		ProductDetail tmpProd = new ProductDetail();
@@ -299,7 +232,7 @@ public class ProductDAO {
 
 	}
 	
-	// Ajouter une demande de reservation
+// Ajouter une demande de reservation
 	public Reponse addReservation(Reservation reserv) {
 		try {
 
@@ -330,7 +263,7 @@ public class ProductDAO {
 
 	}
 
-	// Recuperer les demandeurs de reservation
+// Recuperer les demandeurs de reservation
 	public Reponse GetReservationReq(Integer productId) {
 		List<Reservation> TabRes = new ArrayList<Reservation>();
 		Reservation tmpProd = new Reservation();
@@ -383,7 +316,7 @@ public class ProductDAO {
 
 	}
 	
-	// Valider une demande de reservation et annuler les autre demande de cette annance et passer le satuts de cette annance a 1 qui veux dire c'est deja reserver
+// Valider une demande de reservation et annuler les autre demande de cette annance et passer le satuts de cette annance a 1 qui veux dire c'est deja reserver
 	public Reponse ReservationValidate(Reservation reserv) {
 		
 		try {
@@ -424,54 +357,7 @@ public class ProductDAO {
 		return new Reponse("ok", "L'operation de Validation est bien passer :) :) ");
 		
 	}
-		
-	// *******************************
-	
 
-
-
-
-
-
-	public Reponse allProducts() {
-
-
-		List<Product> res = new ArrayList<Product>();
-		Product tmp;
-
-		try {
-			db = Connexion.getConnection();
-
-			Statement stmt = db.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM Product");
-
-			while (rs.next()) {
-				tmp = new Product();
-
-				tmp.setProductName(rs.getString("ProductName"));
-				tmp.setProductDate(rs.getString("ProductDate"));
-				tmp.setProductDescription(rs.getString("ProductDescription"));
-				tmp.setProductPicture(rs.getString("ProductPicture"));
-				tmp.setProductId(rs.getInt("ProductId"));
-				tmp.setProductPrice(rs.getString("ProductPrice"));
-				tmp.setProductStatus(rs.getInt("ProductStatus"));
-				tmp.setUserId(rs.getInt("UserId"));
-
-				res.add(tmp);
-
-			}
-			stmt.close();
-			db.close();
-
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-			return new Reponse("ko", "Erreur sur le serveur");
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return new Reponse("ko", "Erreur sur le serveur");
-		}
-		return new Reponse("ok", res);
-	}
 
 	public String getDate() {
 		String Mydate = "";
