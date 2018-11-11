@@ -17,37 +17,51 @@ public class ProfilServices {
 
 	ProfilDAO DAO = new ProfilDAO();
 	
-// inscription
-	public JsonObject Registration(Personne prof) {
+	// inscription
+		public JsonObject Registration(Personne prof) {
+			
+
+			if (!IsPresent(prof.getUserName()) || (prof.getUserName().length()<3) ) {
+				return JSonConverter.objectToJson(new Reponse("ko", "getUserName  est obligatoire "));
+			}
+			if (!IsPresent(prof.getUserMail())) {
+				return JSonConverter.objectToJson(new Reponse("ko", "getUserMail  est obligatoire "));
+			}
+			if (!IsPresent(prof.getUserPassword()) || (prof.getUserPassword().length()<6) ) {
+				return JSonConverter.objectToJson(new Reponse("ko", "getUserPassword  est obligatoire "));
+			}
+			if (!IsPresent(prof.getUserAddress())) {
+				return JSonConverter.objectToJson(new Reponse("ko", "UserAddress  est obligatoire "));
+			}
+			if (!IsPresent(prof.getUserPhone())) {
+				return JSonConverter.objectToJson(new Reponse("ko", "getUserPhone  est obligatoire "));
+			}
+			if (!IsPresent(prof.getUserPicture())) {
+				return JSonConverter.objectToJson(new Reponse("ko", "getUserPicture  est obligatoire "));
+			}
+
+			prof.setUserKey(GenerateKey());
+
+			if (!IsPresent(prof.getUserKey())) {
+				return JSonConverter.objectToJson(new Reponse("ko", "erreur lors de generation de key  est obligatoire "));
+			}
+			
+			return JSonConverter.objectToJson(DAO.Registration(prof));
+		}
 		
+		// connexion
+			public JsonObject Login(Personne prof) {
+				
 
-		if (!IsPresent(prof.getUserName()) || (prof.getUserName().length()<3) ) {
-			return JSonConverter.objectToJson(new Reponse("ko", "getUserName  est obligatoire "));
-		}
-		if (!IsPresent(prof.getUserMail())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "getUserMail  est obligatoire "));
-		}
-		if (!IsPresent(prof.getUserPassword()) || (prof.getUserPassword().length()<6) ) {
-			return JSonConverter.objectToJson(new Reponse("ko", "getUserPassword  est obligatoire "));
-		}
-		if (!IsPresent(prof.getUserAddress())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "UserAddress  est obligatoire "));
-		}
-		if (!IsPresent(prof.getUserPhone())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "getUserPhone  est obligatoire "));
-		}
-		if (!IsPresent(prof.getUserPicture())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "getUserPicture  est obligatoire "));
-		}
-
-		prof.setUserKey(GenerateKey());
-
-		if (!IsPresent(prof.getUserKey())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "erreur lors de generation de key  est obligatoire "));
-		}
-		
-		return JSonConverter.objectToJson(DAO.Registration(prof));
-	}
+				if (!IsPresent(prof.getUserPassword()) || (prof.getUserPassword().length()<6) ) {
+					return JSonConverter.objectToJson(new Reponse("ko", "getUserPassword  est obligatoire "));
+				}
+				if (!IsPresent(prof.getUserMail())) {
+					return JSonConverter.objectToJson(new Reponse("ko", "getUserMail  est obligatoire "));
+				} 
+				
+				return JSonConverter.objectToJson(new Reponse("ok", prof));
+			}
 	
 	
 	// ****** fonction utiles
