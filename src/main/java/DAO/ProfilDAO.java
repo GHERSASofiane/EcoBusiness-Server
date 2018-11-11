@@ -62,6 +62,33 @@ public class ProfilDAO {
 		if( !isMailExiste(prof.getUserMail()) ) return new Reponse("ko", "le mail n'existe deja "); 
 		if( !isMailPass(prof.getUserMail(), prof.getUserPassword()) ) return new Reponse("ko", "le mot de passe est incorrect "); 
 		
+		try {
+			db = Connexion.getConnection();
+
+			Statement stmt = db.createStatement();
+			ResultSet rs = stmt
+					.executeQuery("SELECT * FROM Users WHERE UserMail = '"+prof.getUserMail()+"' AND UserPassword = '"+prof.getUserPassword()+"';");
+			while (rs.next()) {
+
+				prof.setUserId(rs.getInt("UserId")); 
+				prof.setUserName(rs.getString("UserName")); 
+				prof.setUserPhone(rs.getString("UserPhone")); 
+				prof.setUserAddress(rs.getString("UserAdress")); 
+				prof.setUserKey(rs.getString("UserKey")); 
+				prof.setUserPicture(rs.getString("UserPicture")); 
+ 				  
+			}
+			rs.close();
+			stmt.close();
+			db.close();
+
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			return new Reponse("ko", "Erreur sur le serveur");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new Reponse("ko", "Erreur sur le serveur");
+		}
 		
 		return new Reponse("ok", prof);
 	}
