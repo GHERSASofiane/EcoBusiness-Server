@@ -64,7 +64,7 @@ public class ProfilDAO {
 			db = Connexion.getConnection();
 			Statement stmt = db.createStatement();
 			ResultSet rs = stmt
-					.executeQuery("SELECT COUNT(*) FROM Users WHERE UserMail = '"+mail+"';");
+					.executeQuery("SELECT * FROM Users WHERE UserMail = '"+mail+"';");
 			
 			if (rs.next()) {
 				res = true;
@@ -88,7 +88,7 @@ public class ProfilDAO {
 			db = Connexion.getConnection();
 			Statement stmt = db.createStatement();
 			ResultSet rs = stmt
-					.executeQuery("SELECT COUNT(*) FROM Users WHERE UserPhone = '"+tel+"';");
+					.executeQuery("SELECT * FROM Users WHERE UserPhone = '"+tel+"';");
 			
 			if (rs.next()) {
 				res = true;
