@@ -56,8 +56,43 @@ public class ProfilDAO {
 		
 	}
 	
+//	login
+	public Reponse Login(Personne prof) {
+
+		if( !isMailExiste(prof.getUserMail()) ) return new Reponse("ko", "le mail n'existe deja "); 
+		if( !isMailPass(prof.getUserMail(), prof.getUserPassword()) ) return new Reponse("ko", "le mot de passe est incorrect "); 
+		
+		
+		return new Reponse("ok", prof);
+	}
 	
 //	********************* fonction utiles
+	
+
+	private boolean isMailPass(String mail, String pass) {
+		boolean res = false;
+		try {
+			db = Connexion.getConnection();
+			Statement stmt = db.createStatement();
+			ResultSet rs = stmt
+					.executeQuery("SELECT * FROM Users WHERE UserMail = '"+mail+"' AND UserPassword = '"+pass+"';");
+			
+			if (rs.next()) {
+				res = true;
+			}			
+			rs.close();
+			stmt.close();
+			db.close();
+
+		} catch (URISyntaxException e) {
+			e.printStackTrace(); return res;
+		} catch (SQLException e) {
+			e.printStackTrace(); return res; 
+		}
+		
+		 return res;
+	}
+	
 	private boolean isMailExiste(String mail) {
 		boolean res = false;
 		try {
