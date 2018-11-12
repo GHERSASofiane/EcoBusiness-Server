@@ -9,7 +9,7 @@ import converters.JSonConverter;
 import models.Product;
 import models.Reservation;
 import status.Reponse;
-
+import java.util.regex.Pattern;
 /**
  *
  * @author Sofiane GHERSA
@@ -31,6 +31,11 @@ public class ProductServices {
 		if (!IsPresent(product.getProductName())) {
 			return JSonConverter.objectToJson(new Reponse("ko", "ProductName est obligatoire"));
 		}
+		
+		if (  Pattern.matches("[a-z]*",product.getProductName())   ) {
+			return JSonConverter.objectToJson(new Reponse("ko", "ProductName ne respecte pas la syntaxe"));
+		}
+		
 		if (!IsPresent(product.getProductDescription())) {
 			return JSonConverter.objectToJson(new Reponse("ko", "ProductDescription  est obligatoire"));
 		}
