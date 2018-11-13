@@ -15,7 +15,7 @@ import emailOperations.EmailVerification;
 import helpers.Readers;
 import models.Personne;
 
-import services.ProfileService;
+import services.ProfilServices;
 import status.Reponse;
 import tokens.AutorisationAcess;
 
@@ -54,8 +54,8 @@ public class SignUp extends HttpServlet {
 		 try
 		 {
 		 if(EmailVerification.isAddressValid(personne.getUserMail())) {
-			 ProfileService pers = new ProfileService();
-			 obj = pers.inscription( personne);
+			 ProfilServices pers = new ProfilServices();
+			 obj = pers.signUp(personne);
 		 }
 		 else
 		 {
