@@ -135,7 +135,7 @@ public class ProductDAO {
 		return new Reponse("ok", res);
 	}
 	
-// Supprision d'une annance
+// Supprission d'une annance
 	public Reponse deleteProduct(int id) {
 		try {
 
@@ -234,6 +234,10 @@ public class ProductDAO {
 	
 // Ajouter une demande de reservation
 	public Reponse addReservation(Reservation reserv) {
+		
+		// tester si l'annance est toujours disponible Concurrence
+		if( !isProductDis(reserv.getProductId()) ) { return new Reponse("ko", "l'annance n'est plus disponible"); }
+		
 		try {
 
 			db = Connexion.getConnection();
@@ -359,6 +363,32 @@ public class ProductDAO {
 		
 	}
 
+//	************************************************** fonction utiles
+	
+	private boolean isProductDis(int prod) {
+		boolean res = false;
+		try {
+			db = Connexion.getConnection();
+			Statement stmt = db.createStatement();
+			ResultSet rs = stmt
+					.executeQuery("SELECT * FROM Product WHERE ProductStatus = 0 AND ProductId = "+prod+";");
+			
+			if (rs.next()) {
+				res = true;
+			}			
+			rs.close();
+			stmt.close();
+			db.close();
+
+		} catch (URISyntaxException e) {
+			e.printStackTrace(); return res;
+		} catch (SQLException e) {
+			e.printStackTrace(); return res; 
+		}
+		
+		 return res;
+	}
+	
 
 	public String getDate() {
 		String Mydate = "";
