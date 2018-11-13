@@ -32,7 +32,7 @@ public class ProductServices {
 			return JSonConverter.objectToJson(new Reponse("ko", "ProductName est obligatoire"));
 		}
 		
-		if (  !Pattern.matches("[a-zA-Z]*",product.getProductName())   ) {
+		if (  !Pattern.matches("[a-zA-Z]+",product.getProductName())   ) {
 			return JSonConverter.objectToJson(new Reponse("ko", "ProductName ne respecte pas la syntaxe"));
 		}
 		
@@ -141,7 +141,7 @@ public class ProductServices {
 		return JSonConverter.objectToJson(pr.GetReservationReq(id));
 	}
 	
-	// recuperer les reservations demander pour un produit donner
+	// valider une reservation
 	public JsonObject ReservationValidate(Reservation reserv) {
 
 		if (!IsPresent(reserv.getProductId())) {
