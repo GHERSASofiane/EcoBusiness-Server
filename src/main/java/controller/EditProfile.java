@@ -13,7 +13,7 @@ import com.google.gson.JsonObject;
 import converters.JSonConverter;
 import helpers.Readers;
 import models.Personne;
-import services.ProfileService;
+import services.ProfilServices;
 import tokens.AutorisationAcess;
 
 /**
@@ -41,8 +41,8 @@ public class EditProfile extends HttpServlet {
 		 Personne personne = new Personne();
 		 personne = (Personne) JSonConverter.objectFromJson(jsObj, personne);
 		  
-		ProfileService pers = new ProfileService();
-		JsonObject obj = pers.editProfile(personne);
+		ProfilServices pers = new ProfilServices();
+		JsonObject obj = pers.update(personne);
 				 
 		PrintWriter pw = response.getWriter();
 		
