@@ -14,7 +14,35 @@
 		<filter-name>FilterHeadears</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
+	
+	
+	<!-- -------------------------------------------------- -->
+	
+	<servlet>
+		<servlet-name>SignUp</servlet-name>
+		<display-name>SignUp</display-name>
+		<description></description>
+		<servlet-class>controller.SignUp</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>EditProfile</servlet-name>
+		<display-name>EditProfile</display-name>
+		<description></description>
+		<servlet-class>controller.EditProfile</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>ComparePrice</servlet-name>
+		<display-name>ComparePrice</display-name>
+		<description></description>
+		<servlet-class>controller.ComparePrice</servlet-class>
+	</servlet>
+	
+	
+	
+	<!-- -------------------------------------------------- -->
+	
 	<servlet>
 		<servlet-name>ADSProduct</servlet-name>
 		<display-name>ADSProduct</display-name>
@@ -103,6 +131,21 @@
 	<servlet-mapping>
 		<servlet-name>Login</servlet-name>
 		<url-pattern>/Login</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>SignUp</servlet-name>
+		<url-pattern>/signup</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>EditProfile</servlet-name>
+		<url-pattern>/editprofile</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>ComparePrice</servlet-name>
+		<url-pattern>/compare</url-pattern>
 	</servlet-mapping>
 	
 </web-app>

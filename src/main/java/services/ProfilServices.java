@@ -6,8 +6,10 @@ import com.google.gson.JsonObject;
 
 import DAO.ProfilDAO;
 import converters.JSonConverter;
+import emailOperations.EmailVerification;
 import models.Personne;
-import status.Reponse; 
+import status.Reponse;
+import tokens.AutorisationAcess; 
 
 /**
  *
@@ -60,9 +62,124 @@ public class ProfilServices {
 					return JSonConverter.objectToJson(new Reponse("ko", "getUserMail  est obligatoire "));
 				} 
 				
-				return JSonConverter.objectToJson(DAO.Login(prof));
+				Reponse reponse = DAO.Login(prof);
+				
+				if(reponse.getStatus().equals("ok"))
+				{
+					JsonObject res = JSonConverter.objectToJson(reponse);
+					String token = AutorisationAcess.registerToken(prof);
+					res.addProperty("token", token);
+					return res;
+				}
+				
+				return JSonConverter.objectToJson(reponse);
 			}
 	
+		public JsonObject signUp(Personne prof)
+		{
+			if (!IsPresent(prof.getUserPassword()) || (prof.getUserPassword().length()<6) ) {
+				return JSonConverter.objectToJson(new Reponse("ko", "getUserPassword  est obligatoire "));
+			}
+			
+			if (IsPresent(prof.getUserMail())) {
+				if(!EmailVerification.isAddressValid(prof.getUserMail()))
+					return JSonConverter.objectToJson(new Reponse("ko", prof.getUserMail() + " est invalide"));
+			}
+			else
+			return JSonConverter.objectToJson(new Reponse("ko", "getUserMail  est obligatoire "));
+			
+			if (!IsPresent(prof.getUserName())) {
+				return JSonConverter.objectToJson(new Reponse("ko", "getUserName  est obligatoire "));
+			}
+			else
+				if(prof.getUserName().length() < 4)
+					return JSonConverter.objectToJson(new Reponse("ko", "UserName doit avoir au minimum 4 caracteres"));
+					
+			
+			if (!IsPresent(prof.getUserPhone())) {
+				return JSonConverter.objectToJson(new Reponse("ko", "getUserPhone  est obligatoire "));
+			} 
+			else
+				if(prof.getUserPhone().length() < 8)
+					return JSonConverter.objectToJson(new Reponse("ko", "UserPhone doit avoir au minimum 8 caracteres"));
+			
+			if (!IsPresent(prof.getUserPicture())) {
+				return JSonConverter.objectToJson(new Reponse("ko", "getUserPicture  est obligatoire "));
+			} 
+			
+			if (!IsPresent(prof.getUserAddress())) {
+				return JSonConverter.objectToJson(new Reponse("ko", "getUserAddress  est obligatoire "));
+			} 
+			
+			
+			Reponse reponse = DAO.Registration(prof);
+			
+			if(reponse.getStatus().equals("ok"))
+			{
+				JsonObject res = JSonConverter.objectToJson(reponse);
+				String token = AutorisationAcess.registerToken(prof);
+				res.addProperty("token", token);
+				return res;
+			}
+			
+			return JSonConverter.objectToJson(reponse);
+			
+			
+			
+		}
+		
+		
+		public JsonObject update(Personne prof)
+		{
+			if (!IsPresent(prof.getUserPassword()) || (prof.getUserPassword().length()<6) ) {
+				return JSonConverter.objectToJson(new Reponse("ko", "getUserPassword  est obligatoire "));
+			}
+			
+			if (IsPresent(prof.getUserMail())) {
+				if(!EmailVerification.isAddressValid(prof.getUserMail()))
+					return JSonConverter.objectToJson(new Reponse("ko", prof.getUserMail() + " est invalide"));
+			}
+			else
+			return JSonConverter.objectToJson(new Reponse("ko", "getUserMail  est obligatoire "));
+			
+			if (!IsPresent(prof.getUserName())) {
+				return JSonConverter.objectToJson(new Reponse("ko", "getUserName  est obligatoire "));
+			}
+			else
+				if(prof.getUserName().length() < 4)
+					return JSonConverter.objectToJson(new Reponse("ko", "UserName doit avoir au minimum 4 caracteres"));
+					
+			
+			if (!IsPresent(prof.getUserPhone())) {
+				return JSonConverter.objectToJson(new Reponse("ko", "getUserPhone  est obligatoire "));
+			} 
+			else
+				if(prof.getUserPhone().length() < 8)
+					return JSonConverter.objectToJson(new Reponse("ko", "UserPhone doit avoir au minimum 8 caracteres"));
+			
+			if (!IsPresent(prof.getUserPicture())) {
+				return JSonConverter.objectToJson(new Reponse("ko", "getUserPicture  est obligatoire "));
+			} 
+			
+			if (!IsPresent(prof.getUserAddress())) {
+				return JSonConverter.objectToJson(new Reponse("ko", "getUserAddress  est obligatoire "));
+			} 
+			
+			
+			Reponse reponse = DAO.update(prof);
+			
+			if(reponse.getStatus().equals("ok"))
+			{
+				JsonObject res = JSonConverter.objectToJson(reponse);
+				String token = AutorisationAcess.registerToken(prof);
+				res.addProperty("token", token);
+				return res;
+			}
+			
+			return JSonConverter.objectToJson(reponse);
+			
+			
+		}
 	
 	// ****** fonction utiles
 

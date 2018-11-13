@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.google.gson.JsonObject;
-
 import configuration.Connexion;
 import models.Personne;
 import status.Reponse;
@@ -20,6 +18,44 @@ import status.Reponse;
 public class ProfilDAO {
 
 	private Connection db;
+	
+// update profile
+	public Reponse update(Personne prof)
+	{
+			if( isMailExiste(prof.getUserMail()) ) return new Reponse("ko", "le mail existe deja ");
+			if( isTelExiste(prof.getUserPhone()) ) return new Reponse("ko", "le Phone existe deja ");
+			
+			try {
+				db = Connexion.getConnection();
+				String query = "UPDATE users SET (userMail, userName, userPassword, userPhone, userAdress, userKey, userprofilepicture) = (?,?,?,?,?,?)"
+						+ "  WHERE userId = ?;";
+				PreparedStatement preparedStmt = db.prepareStatement(query);
+				preparedStmt.setString(1, prof.getUserMail() );
+				preparedStmt.setString(2, prof.getUserName() );
+				preparedStmt.setString(3, prof.getUserPassword() );
+				preparedStmt.setString(4, prof.getUserPhone() );
+				preparedStmt.setString(5, prof.getUserAddress() );
+				preparedStmt.setString(6, prof.getUserKey() );
+				preparedStmt.setString(7, prof.getUserPicture());
+				preparedStmt.setInt(8, prof.getUserId());
+				
+				// execute the prepared statement
+				preparedStmt.execute();
+				preparedStmt.close();
+				db.close();
+
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+				return new Reponse("ko", "votre inscription a echooo");
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return new Reponse("ko", "votre inscription a echooo");
+			}
+			
+			prof.setUserPassword("");
+			return new Reponse("ok", prof);
+
+	}
 	
 //	inscription
 	public Reponse Registration(Personne prof) {
@@ -52,6 +88,7 @@ public class ProfilDAO {
 			return new Reponse("ko", "votre inscription a echooo");
 		}
 		
+		prof.setUserPassword("");
 		return new Reponse("ok", prof);
 		
 	}
