@@ -112,6 +112,7 @@ public class ProfilServices {
 			} 
 			
 			
+			prof.setUserKey(GenerateKey());
 			Reponse reponse = DAO.Registration(prof);
 			
 			if(reponse.getStatus().equals("ok"))
@@ -165,7 +166,7 @@ public class ProfilServices {
 				return JSonConverter.objectToJson(new Reponse("ko", "getUserAddress  est obligatoire "));
 			} 
 			
-			
+			prof.setUserKey(GenerateKey());
 			Reponse reponse = DAO.update(prof);
 			
 			if(reponse.getStatus().equals("ok"))
