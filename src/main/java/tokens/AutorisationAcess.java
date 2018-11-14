@@ -4,6 +4,8 @@ package tokens;
 
 
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.auth0.jwt.JWT;
@@ -26,12 +28,12 @@ public class AutorisationAcess {
 		Algorithm algo;
                 
                 algo = Algorithm.HMAC256("secretKey");
-          
+                
 		Builder token = JWT.create().withIssuer("auth0");
-		
 		token.withClaim("userId", personne.getUserId());
 		token.withClaim("userMail", personne.getUserMail());
 		token.withClaim("userName", personne.getUserName());
+		token.withExpiresAt (new Date(System.currentTimeMillis() + 86400000));
 		
 		
 		String tok = token.sign(algo);
