@@ -169,7 +169,7 @@ public class getProductName {
 		try {
 			Connection db = Connexion.getConnection();
 			Statement pst = db.createStatement();
-			pst.executeQuery(" delete from productPrices;");
+			pst.execute(" delete from productPrices;");
 			pst.close();
 			db.close();
 
