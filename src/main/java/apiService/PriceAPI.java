@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -69,7 +70,8 @@ public class PriceAPI {
 	public static JsonObject createNewJob(String productName)
 	{
 		
-		URL url;
+	
+		isFinished = false;
 		String uri =  url_job + apiKey + source + country + topic + key + "&values=" + productName;
 		return (JsonObject) connect(uri, "POST");
 		
@@ -80,34 +82,65 @@ public class PriceAPI {
 	public static JsonObject waitForFinish(String bulkId)
 	{
 		String uri = url_job + "/" + bulkId + apiKey;
-		return (JsonObject) connect(uri, "GET");
+		return connect(uri, "GET").getAsJsonObject();
 	}
+	
+	
+	
 	 
 	public static JsonObject searchProduct(String productName)
 	{
 		JsonObject bulk = createNewJob(productName).getAsJsonObject();
 		String bulkId = bulk.get("job_id").getAsString();
 		
-		JsonObject waitBulk = waitForFinish(bulkId);
 		
-		while(!waitBulk.get("status").getAsString().equals("finished"))
-		{
-			try {
-				Thread.sleep(100);
-				
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			waitBulk = waitForFinish(bulkId);
-		}
-		isFinished = true;
+		
+		
+		Boolean done = false;
+	    while (!done) {
+	      try {
+	        Thread.sleep(5000);
+	      } catch (InterruptedException e) {
+	        e.printStackTrace();
+	      }
+	      JsonObject bulkStatus = waitForFinish(bulkId);
+
+	      Boolean isComplete = false;
+	      String status =  bulkStatus.get("status").getAsString();
+	      isComplete = status.equals("finished");
+	     
+	      if (isComplete) {
+	        done = true;
+	      }
+	    }
+	    
 		String status = bulk.get("status").getAsString();
 		System.out.println("bulk id : " + bulkId + " status : " + status);
 		String uri = url_product + bulkId + apiKey;
+	
+		
+	//	String uri = url_product + "5bec6d267a4b2b169dee6eb6" + apiKey;
+		
 		return  connect(uri, "GET").getAsJsonObject();
 		
 	}
 	
+	
+	public static String values(List<String> param)
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("value=");
+		for(String p : param)
+		{
+			sb.append(p.replaceAll(" ", "%20") + "%0A");
+		}
+		
+		
+		if(sb.length() > 2)
+			sb.delete(sb.length() - 3, sb.length() - 1);
+		
+		return sb.toString();
+	}
 	
 }

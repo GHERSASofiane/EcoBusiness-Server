@@ -1,6 +1,7 @@
 package launch;
 
 import java.io.File;
+import java.util.Timer;
 
 import org.apache.catalina.WebResourceRoot;
 import org.apache.catalina.core.StandardContext;
@@ -43,6 +44,10 @@ public class Main {
         // Launch Back-End
         // test t1 = new test();
         // t1.testerBack();
+        
+        Timer timer;
+		timer = new Timer();
+		timer.schedule(new apiService.backend.SchecduledTask(), 1000, 2 * 86400000);
   
         tomcat.getServer().await();
     }
