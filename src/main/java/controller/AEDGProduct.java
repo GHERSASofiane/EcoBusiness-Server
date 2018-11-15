@@ -1,4 +1,6 @@
-// Class pour la getion des annances ajout,supprimer et recherche
+
+// Class pour la gestion des annonces ajouter, modifier, supprimer et recherche
+
 package controller;
 
 import java.io.IOException;
@@ -13,63 +15,85 @@ import com.google.gson.JsonObject;
 
 import converters.JSonConverter;
 import helpers.Readers;
+import models.Product;
 import services.ProductServices;
 
 /**
  *
  * @author Sofiane GHERSA
  */
-public class ADSProduct extends HttpServlet {
+public class AEDGProduct extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	public ADSProduct() {
+	public AEDGProduct() {
 		super();
 	}
 
-//	méthode pour l'ajoute d'une annance
+//**************************************************	méthode pour l'ajoute d'une annonce
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Récuperer le PrintWriter Pour envoyer la réponse
 		PrintWriter resp = response.getWriter();
-
+		// transférer les données de la requête en Json
 		JsonObject jsObj = Readers.getJSONfromRequest(request);
-
+		// extraire les données qu'on a besoin
 		models.Product product = new models.Product();
 		product = (models.Product) JSonConverter.objectFromJson(jsObj, product);
 
-		// Préparer la répense
+		// Préparer la réponse
 		ProductServices rep = new ProductServices();
-		// Envoie de réponse
+		// Envoie de réponse au client
 		resp.println(rep.addProduct(product));
 		resp.flush();
 
 	}
 
-//	Pour la supprission d'une annance
+//**************************************************	Pour la modification d'une annonce 
+	@Override
+	protected void doPut(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Récuperer le PrintWriter Pour envoyer la réponse
+		PrintWriter resp = response.getWriter();
+		// transférer les données de la requête en Json
+		JsonObject jsObj = Readers.getJSONfromRequest(request);
+		// extraire les données qu'on a besoin
+		Product product = new Product();
+		product = (Product) JSonConverter.objectFromJson(jsObj, product);
+
+		// Préparer la réponse
+		ProductServices rep = new ProductServices();
+
+		// Envoie de réponse
+		resp.println(rep.EditProduct(product));
+		resp.flush();
+
+	}
+
+//**************************************************	Pour la suppression d'une annonce
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 		// Récuperer le PrintWriter Pour envoyer la réponse
 		PrintWriter resp = response.getWriter();
-
+		// extraire les données qu'on a besoin
 		int idProduct = Integer.parseInt(req.getParameter("idProduct"));
 
-		// Préparer la répense
+		// Préparer la réponse
 		ProductServices rep = new ProductServices();
 		// Envoie de réponse
 		resp.println(rep.DeleteProduct(idProduct));
 		resp.flush();
 	}
 
-//	fonction pour la recherche d'une annance
+//**************************************************	fonction pour la recherche d'une annonce
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Récuperer le PrintWriter Pour envoyer la réponse
 		PrintWriter resp = response.getWriter();
 
-		// recuperer les params
+		// extraire les données qu'on a besoin
 		String PName = request.getParameter("ProductName");
 		String Page = request.getParameter("Page");
 		if (PName == null) {

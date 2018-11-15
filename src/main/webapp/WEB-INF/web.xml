@@ -44,15 +44,15 @@
 	<!-- ******************************************************** -->
 	
 	<servlet>
-		<servlet-name>ADSProduct</servlet-name>
-		<display-name>ADSProduct</display-name>
-		<servlet-class>controller.ADSProduct</servlet-class>
+		<servlet-name>AEDGProduct</servlet-name>
+		<display-name>AEDGProduct</display-name>
+		<servlet-class>controller.AEDGProduct</servlet-class>
 	</servlet>
 
 	<servlet>
-		<servlet-name>EDProduct</servlet-name>
-		<display-name>EDProduct</display-name>
-		<servlet-class>controller.EDProduct</servlet-class>
+		<servlet-name>AdDetails</servlet-name>
+		<display-name>AdDetails</display-name>
+		<servlet-class>controller.AdDetails</servlet-class>
 	</servlet>
 	
 	<servlet>
@@ -95,12 +95,12 @@
  
  
 	<servlet-mapping>
-		<servlet-name>ADSProduct</servlet-name>
-		<url-pattern>/ADSProduct</url-pattern>
+		<servlet-name>AEDGProduct</servlet-name>
+		<url-pattern>/AEDGProduct</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>EDProduct</servlet-name>
-		<url-pattern>/EDProduct</url-pattern>
+		<servlet-name>AdDetails</servlet-name>
+		<url-pattern>/AdDetails</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
