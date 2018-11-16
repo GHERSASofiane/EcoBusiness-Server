@@ -1,3 +1,6 @@
+
+// Class pour demander une réservation d'une annonce et récupérer les demandes 
+
 package controller;
 
 import java.io.IOException;
@@ -22,50 +25,47 @@ import services.ProductServices;
 
 public class ReservationProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-     
-    public ReservationProduct() {
-        super(); 
-    }
-    
-//	recuperer les damandes de cette annance  
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	       // Récuperer le PrintWriter Pour envoyer la réponse
-        PrintWriter resp = response.getWriter();
 
-        String ids = request.getParameter("id");
-        int id = Integer.parseInt(ids);
-         
-        
-        // Préparer la répense
-        ProductServices rep = new ProductServices(); 
-		// Envoie de réponse 
-        resp.println(rep.GetReservationReq(id)); 
-        resp.flush();
-		
-		
-	}
-	
-//	ajouter une demande de reservation
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	       // Récuperer le PrintWriter Pour envoyer la réponse
-     PrintWriter resp = response.getWriter();
-
-     JsonObject jsObj = Readers.getJSONfromRequest(request);
-     
-     Reservation reserv = new Reservation();
-     reserv = (Reservation) JSonConverter.objectFromJson(jsObj, reserv);
-     
-		
-     // Préparer la répense
-     ProductServices rep = new ProductServices(); 
-		// Envoie de réponse 
-     resp.println(rep.addReservation(reserv)); 
-     resp.flush();
-		
-		
+	public ReservationProduct() {
+		super();
 	}
 
-	
+//**************************************************	récupérer les demandes de réservation de cette annonce  
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Récuperer le PrintWriter Pour envoyer la réponse
+		PrintWriter resp = response.getWriter();
+		// extraire les données qu'on a besoin
+		String ids = request.getParameter("id");
+		int id = Integer.parseInt(ids);
+
+		// Préparer la répense
+		ProductServices rep = new ProductServices();
+		// Envoie de réponse
+		resp.println(rep.GetReservationReq(id));
+		resp.flush();
+
+	}
+
+//**************************************************	ajouter une demande de réservation
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Récuperer le PrintWriter Pour envoyer la réponse
+		PrintWriter resp = response.getWriter();
+		// transférer les données de la requête en Json
+		JsonObject jsObj = Readers.getJSONfromRequest(request);
+		// extraire les données qu'on a besoin
+		Reservation reserv = new Reservation();
+		reserv = (Reservation) JSonConverter.objectFromJson(jsObj, reserv);
+
+		// Préparer la répense
+		ProductServices rep = new ProductServices();
+		// Envoie de réponse
+		resp.println(rep.addReservation(reserv));
+		resp.flush();
+
+	}
 
 }

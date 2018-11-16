@@ -1,6 +1,10 @@
+
+// Class pour tester les données entrer par le client avant de passer a la coche qui communique avec la BDD
+
 package services;
 
 import java.util.Calendar;
+import java.util.regex.Pattern;
 
 import com.google.gson.JsonObject;
 
@@ -9,7 +13,7 @@ import converters.JSonConverter;
 import models.Product;
 import models.Reservation;
 import status.Reponse;
-import java.util.regex.Pattern;
+
 /**
  *
  * @author Sofiane GHERSA
@@ -17,25 +21,26 @@ import java.util.regex.Pattern;
 public class ProductServices {
 
 	ProductDAO pr = new ProductDAO();
-		
-	// recherche des annances 
-	public JsonObject searchProduct(String nameArticle, int page)
-	{
-		
+
+// ************************************************** Recherche des annonces
+	public JsonObject searchProduct(String nameArticle, int page) {
+
+//		Passer à la couche qui communique avec La BDD
 		return JSonConverter.objectToJson(pr.searchProduct(nameArticle, page));
 	}
-	
-	// ajouter une annance
+
+// ************************************************** Ajouter une annonce
 	public JsonObject addProduct(Product product) {
 
+//		Tester les données envoyé par le client parce qu'on fais pas confiance ;)
 		if (!IsPresent(product.getProductName())) {
 			return JSonConverter.objectToJson(new Reponse("ko", "ProductName est obligatoire"));
 		}
-		
-		if (  !Pattern.matches("[a-zA-Z]+",product.getProductName())   ) {
+
+		if (!Pattern.matches("[a-zA-Z]+", product.getProductName())) {
 			return JSonConverter.objectToJson(new Reponse("ko", "ProductName ne respecte pas la syntaxe"));
 		}
-		
+
 		if (!IsPresent(product.getProductDescription())) {
 			return JSonConverter.objectToJson(new Reponse("ko", "ProductDescription  est obligatoire"));
 		}
@@ -47,37 +52,43 @@ public class ProductServices {
 		}
 		if (!IsPresent(product.getProductPicture())) {
 			return JSonConverter.objectToJson(new Reponse("ko", "ProductPicture  est obligatoire"));
-		} 
-
+		}
+//		Ajouter quelque information 
 		product.setProductDate(getDate());
 		product.setProductStatus(0);
 
+//		Passer à la couche qui communique avec La BDD
 		return JSonConverter.objectToJson(pr.addProduct(product));
 	}
 
-	// recuperer les annances publier
+// ************************************************** Récupérer les annonces publier par l'utilisateur courant
 	public JsonObject MyPubs(int id) {
 
+//		Tester les données envoyé par le client parce qu'on fais pas confiance ;)
 		if (!IsPresent(id)) {
 			return JSonConverter.objectToJson(new Reponse("ko", "Pas d'identifiant pour la recherch "));
 		}
 
+//		Passer à la couche qui communique avec La BDD
 		return JSonConverter.objectToJson(pr.MyPubs(id));
 	}
-	
-	// supprimer une annance	
+
+// ************************************************** Supprimer une annonce
 	public JsonObject DeleteProduct(int id) {
 
+//		Tester les données envoyé par le client parce qu'on fais pas confiance ;)
 		if (!IsPresent(id)) {
 			return JSonConverter.objectToJson(new Reponse("ko", "Pas d'identifiant pour la supprission "));
 		}
 
+//		Passer à la couche qui communique avec La BDD
 		return JSonConverter.objectToJson(pr.deleteProduct(id));
 	}
 
-	// Modifier une annance
+// ************************************************** Modifier une annonce
 	public JsonObject EditProduct(Product product) {
 
+//		Tester les données envoyé par le client parce qu'on fais pas confiance ;)
 		if (!IsPresent(product.getProductName())) {
 			return JSonConverter.objectToJson(new Reponse("ko", "ProductName est obligatoire"));
 		}
@@ -92,26 +103,28 @@ public class ProductServices {
 		}
 		if (!IsPresent(product.getProductPicture())) {
 			return JSonConverter.objectToJson(new Reponse("ko", "ProductPicture  est obligatoire"));
-		} 
-		
+		}
+
+//		Passer à la couche qui communique avec La BDD
 		return JSonConverter.objectToJson(pr.EditProduct(product));
 	}
-	
 
-	// recuperer les details d'une annance
-	public JsonObject getProductDetails(Integer productId)
-	{
+// ************************************************** Récupérer les détails d'une annonce
+	public JsonObject getProductDetails(Integer productId) {
 
-		if (!IsPresent( productId )) {
+//		Tester les données envoyé par le client parce qu'on fais pas confiance ;)
+		if (!IsPresent(productId)) {
 			return JSonConverter.objectToJson(new Reponse("ko", "productId est obligatoire"));
 		}
-		
+
+//		Passer à la couche qui communique avec La BDD
 		return JSonConverter.objectToJson(pr.getProductDetails(productId));
 	}
 
-	// Ajouter une demande
+// ************************************************** Ajouter une demande
 	public JsonObject addReservation(Reservation reserv) {
 
+//		Tester les données envoyé par le client parce qu'on fais pas confiance ;)
 		if (!IsPresent(reserv.getReservationDate())) {
 			return JSonConverter.objectToJson(new Reponse("ko", "getReservationDate  est obligatoire "));
 		}
@@ -127,33 +140,36 @@ public class ProductServices {
 		if (!IsPresent(reserv.getReservationSend())) {
 			return JSonConverter.objectToJson(new Reponse("ko", "getReservationSend  est obligatoire "));
 		}
-
+		
+//		Passer à la couche qui communique avec La BDD
 		return JSonConverter.objectToJson(pr.addReservation(reserv));
 	}
 
-	// recuperer les reservations demander pour un produit donner
+// ************************************************** Récupérer les réservations demander pour un produit donner
 	public JsonObject GetReservationReq(int id) {
 
+//		Tester les données envoyé par le client parce qu'on fais pas confiance ;)
 		if (!IsPresent(id)) {
 			return JSonConverter.objectToJson(new Reponse("ko", "ID  est obligatoire "));
 		}
-
+		
+//		Passer à la couche qui communique avec La BDD
 		return JSonConverter.objectToJson(pr.GetReservationReq(id));
 	}
-	
-	// valider une reservation
+
+// ************************************************** Valider une réservation
 	public JsonObject ReservationValidate(Reservation reserv) {
 
+//		Tester les données envoyé par le client parce qu'on fais pas confiance ;)
 		if (!IsPresent(reserv.getProductId())) {
 			return JSonConverter.objectToJson(new Reponse("ko", "ID  est obligatoire "));
 		}
-
+		
+//		Passer à la couche qui communique avec La BDD
 		return JSonConverter.objectToJson(pr.ReservationValidate(reserv));
 	}
-	
- 
 
-// ****** fonction utiles
+// ************************************************** Fonction utiles
 
 	private boolean IsPresent(String arg) {
 

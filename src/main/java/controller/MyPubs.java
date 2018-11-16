@@ -1,3 +1,6 @@
+
+// Class pour récuperer les annonces de client
+
 package controller;
 
 import java.io.IOException;
@@ -7,33 +10,34 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
- 
-import services.ProductServices; 
+
+import services.ProductServices;
 
 /**
  *
  * @author Sofiane GHERSA
  */
-public class MyPubs extends HttpServlet{
- 
+public class MyPubs extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 
-	public MyPubs() { super(); }
-	
-//	recuperer les annances 
+	public MyPubs() {
+		super();
+	}
+
+//**************************************************	récuperer les annances 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
-        // Récuperer le PrintWriter Pour envoyer la réponse
-        PrintWriter resp = response.getWriter();
-        
-        int idUser =  Integer.parseInt(req.getParameter("idUser"));
-        
-        // Préparer la répense
-        ProductServices rep = new ProductServices();
-        // Envoie de réponse
-        resp.println(rep.MyPubs(idUser));
-        resp.flush();
-        
-        
+		// Récuperer le PrintWriter Pour envoyer la réponse
+		PrintWriter resp = response.getWriter();
+		// Récuperer le ID de l'utilisateur
+		int idUser = Integer.parseInt(req.getParameter("idUser"));
+
+		// Préparer la répense
+		ProductServices rep = new ProductServices();
+		// Envoie de réponse
+		resp.println(rep.MyPubs(idUser));
+		resp.flush();
+
 	}
 }

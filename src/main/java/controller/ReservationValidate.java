@@ -1,3 +1,6 @@
+
+// Class pour la confirmation d'une demande de réservation
+
 package controller;
 
 import java.io.IOException;
@@ -13,7 +16,7 @@ import com.google.gson.JsonObject;
 import converters.JSonConverter;
 import helpers.Readers;
 import models.Reservation;
-import services.ProductServices; 
+import services.ProductServices;
 
 /**
  *
@@ -27,21 +30,22 @@ public class ReservationValidate extends HttpServlet {
 		super();
 	}
 
-//	confermation d'une demande de reservation
+//**************************************************	confirmation d'une demande de réservation
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Récuperer le PrintWriter Pour envoyer la réponse
 		PrintWriter resp = response.getWriter();
-
+		// transférer les données de la requête en Json
 		JsonObject jsObj = Readers.getJSONfromRequest(request);
-
+		// extraire les données qu'on a besoin
 		Reservation reserv = new Reservation();
 		reserv = (Reservation) JSonConverter.objectFromJson(jsObj, reserv);
 
 		// Préparer la réponse
 		ProductServices rep = new ProductServices();
 		// Envoie de réponse
-		resp.println(rep.ReservationValidate(reserv));  
+		resp.println(rep.ReservationValidate(reserv));
 		resp.flush();
 
 	}
