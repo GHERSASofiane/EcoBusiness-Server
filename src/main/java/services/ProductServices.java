@@ -37,7 +37,7 @@ public class ProductServices {
 			return JSonConverter.objectToJson(new Reponse("ko", "ProductName est obligatoire"));
 		}
 
-		if (!Pattern.matches("[a-zA-Z0-9]+", product.getProductName())) {
+		if (!Pattern.matches("[a-zA-Z0-9\\s]+", product.getProductName())) {
 			return JSonConverter.objectToJson(new Reponse("ko", "ProductName ne respecte pas la syntaxe"));
 		}
 
