@@ -414,10 +414,10 @@ public class ProductDAO {
 
 			} catch (URISyntaxException e) {
 				e.printStackTrace();
-				return new Reponse("ko", "Erreur sur le serveur");
+				return new Reponse("ko", "Erreur sur le serveur 1");
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return new Reponse("ko", "Erreur sur le serveur");
+				return new Reponse("ko", "Erreur sur le serveur 2");
 			}
 			return new Reponse("ok", res);
 		}
