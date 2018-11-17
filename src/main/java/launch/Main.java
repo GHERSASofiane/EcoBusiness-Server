@@ -47,7 +47,7 @@ public class Main {
         
         Timer timer;
 		timer = new Timer();
-		timer.schedule(new apiService.backend.SchecduledTask(), 1000, 2 * 86400000);
+		timer.schedule(new apiService.backend.SchecduledTask(), 1000, 7 * 86400000);
   
         tomcat.getServer().await();
     }
