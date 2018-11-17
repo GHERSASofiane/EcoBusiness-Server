@@ -387,7 +387,7 @@ public class ProductDAO {
 					.executeQuery("SELECT COUNT(*) FROM Product WHERE ProductStatus = 0 AND ProductId = " + prod + ";");
 
 			
-			if (rs.getInt(1) == 0) {
+			if (rs.getInt(1) == 1) {
 				res = true;  
 			}
 			rs.close();
