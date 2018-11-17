@@ -215,6 +215,9 @@ public class ProfilDAO {
 	public boolean getUserWithId(int userId) {
 		try {
 			db = Connexion.getConnection();
+			
+			System.out.println("user id ---------------------> " + userId);
+			
 			String res = "select count(*) from users where userId =?;";
 			PreparedStatement pst = db.prepareStatement(res);
 			pst.setInt(1, userId);
