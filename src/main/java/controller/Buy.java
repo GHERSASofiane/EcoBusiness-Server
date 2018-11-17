@@ -34,7 +34,7 @@ public class Buy extends HttpServlet {
 
 	//**************************************************	méthode pour la validation 
 		@Override
-		protected void doPost(HttpServletRequest request, HttpServletResponse response)
+		protected void doGet(HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException {
 			// Récuperer le PrintWriter Pour envoyer la réponse
 			PrintWriter resp = response.getWriter();
@@ -52,7 +52,6 @@ public class Buy extends HttpServlet {
 	        
 	        	// transférer les données de la requête en Json
 	    		JsonObject jsObj = Readers.getJSONfromRequest(request);
-	    		// extraire les données qu'on a besoin
 	    		// extraire les données qu'on a besoin 
 	    		String ID = request.getParameter("id"); 
 	    		if (ID == null) {
