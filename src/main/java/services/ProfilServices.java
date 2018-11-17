@@ -169,14 +169,17 @@ public class ProfilServices {
 			prof.setUserKey(GenerateKey());
 			Reponse reponse = DAO.update(prof);
 			
+			/**
 			if(reponse.getStatus().equals("ok"))
 			{
+				
 				JsonObject res = JSonConverter.objectToJson(reponse);
 				String token = AutorisationAcess.registerToken((Personne) reponse.getReponse());
 				res.addProperty("token", token);
+				
 				return res;
 			}
-			
+			*/
 			return JSonConverter.objectToJson(reponse);
 			
 			
