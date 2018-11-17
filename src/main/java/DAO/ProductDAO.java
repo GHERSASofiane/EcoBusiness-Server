@@ -387,7 +387,7 @@ public class ProductDAO {
 					.executeQuery("SELECT * FROM Product WHERE ProductStatus = 0 AND ProductId = " + prod + ";");
 
 			if (rs.next()) {
-				res = true;
+				res = true; return res;
 			}
 			rs.close();
 			stmt.close();
