@@ -53,7 +53,7 @@ public class Buy extends HttpServlet {
 	        	// transférer les données de la requête en Json
 	    		JsonObject jsObj = Readers.getJSONfromRequest(request);
 	    		// extraire les données qu'on a besoin
-	    		int id  ;
+	    		int id  = 0 ;
 	    		id = (Integer) JSonConverter.objectFromJson(jsObj, id);
 
 	    		// Préparer la réponse
