@@ -419,7 +419,7 @@ public class ProductDAO {
 
 				Statement stmt = db.createStatement();
 				ResultSet rs = stmt.executeQuery(
-						"SELECT * FROM Product, Booking, Users WHERE Product.userid = Users.UserId AND Product.ProductId = 1 AND Product.ProductId = Booking.ProductId AND Booking.UserId = " + id + "  ORDER BY BookingDated DESC ");
+						"SELECT * FROM Product, Booking, Users WHERE Product.userid = Users.UserId AND Product.ProductStatus = 1 AND Product.ProductId = Booking.ProductId AND Booking.UserId = " + id + "  ORDER BY BookingDated DESC ");
 
 				while (rs.next()) {
 					tmp = new ProductDetail();
