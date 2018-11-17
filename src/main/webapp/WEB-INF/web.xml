@@ -44,6 +44,12 @@
 		<servlet-class>controller.ComparePrice</servlet-class>
 	</servlet>
 	
+	<servlet>
+		<servlet-name>Buy</servlet-name>
+		<display-name>Buy</display-name> 
+		<servlet-class>controller.Buy</servlet-class>
+	</servlet>
+	
 	
 	
 	<!-- ******************************************************** -->   
@@ -99,6 +105,10 @@
  <!-- *************************************************************************** -->
  
  
+	<servlet-mapping>
+		<servlet-name>Buy</servlet-name>
+		<url-pattern>/Buy</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Driving</servlet-name>
 		<url-pattern>/Driving</url-pattern>

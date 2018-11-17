@@ -375,6 +375,38 @@ public class ProductDAO {
 
 	}
 
+//*************************************************************	cette fonction pour valider l'achat d'un produit par le client
+		public Reponse Buy(int id) {
+
+			// tester si l'annance est toujours disponible pour la Concurrence
+			if (!isProductDis(id)) {
+				return new Reponse("ko", "l'annance n'est plus disponible");
+			}
+			
+			try {
+
+				db = Connexion.getConnection();
+
+				// changer le status
+				String path = "UPDATE Product SET ProductStatus = 2 WHERE ProductId = ?;";
+				PreparedStatement preparedStmt = db.prepareStatement(path);
+				preparedStmt.setInt(1, id);
+				preparedStmt.execute();
+ 
+				preparedStmt.close();
+				db.close();
+
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+				return new Reponse("ko", "votre Validation n'a pas pu etre valider");
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return new Reponse("ko", "votre Validation n'a pas pu etre valider");
+			}
+
+			return new Reponse("ok", "L'operation de Validation est bien passer :) :) ");
+
+		}
 
 //*************************************************************	Fonction pour récupérer le driving
 		public Reponse Driving(int id) {
@@ -387,7 +419,7 @@ public class ProductDAO {
 
 				Statement stmt = db.createStatement();
 				ResultSet rs = stmt.executeQuery(
-						"SELECT * FROM Product, Booking, Users WHERE Product.userid = Users.UserId AND Product.ProductId = Booking.ProductId AND Booking.UserId = " + id + "  ORDER BY BookingDated DESC ");
+						"SELECT * FROM Product, Booking, Users WHERE Product.userid = Users.UserId AND Product.ProductId = 1 AND Product.ProductId = Booking.ProductId AND Booking.UserId = " + id + "  ORDER BY BookingDated DESC ");
 
 				while (rs.next()) {
 					tmp = new ProductDetail();
@@ -431,7 +463,7 @@ public class ProductDAO {
 			db = Connexion.getConnection();
 			Statement stmt = db.createStatement();
 			ResultSet rs = stmt
-					.executeQuery("SELECT COUNT(*) FROM Product WHERE ProductStatus = 0 AND ProductId = " + prod + ";");
+					.executeQuery("SELECT COUNT(*) FROM Product WHERE ProductId = " + prod + ";");
 
 			
 			while(rs.next()) {
