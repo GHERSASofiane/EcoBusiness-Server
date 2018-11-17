@@ -62,16 +62,28 @@ public class ProductServices {
 	}
 
 // ************************************************** Récupérer les annonces publier par l'utilisateur courant
-	public JsonObject MyPubs(int id) {
+		public JsonObject MyPubs(int id) {
 
-//		Tester les données envoyé par le client parce qu'on fais pas confiance ;)
-		if (!IsPresent(id)) {
-			return JSonConverter.objectToJson(new Reponse("ko", "Pas d'identifiant pour la recherch "));
+//			Tester les données envoyé par le client parce qu'on fais pas confiance ;)
+			if (!IsPresent(id)) {
+				return JSonConverter.objectToJson(new Reponse("ko", "Pas d'identifiant pour la recherch "));
+			}
+
+//			Passer à la couche qui communique avec La BDD
+			return JSonConverter.objectToJson(pr.MyPubs(id));
 		}
 
-//		Passer à la couche qui communique avec La BDD
-		return JSonConverter.objectToJson(pr.MyPubs(id));
-	}
+// ************************************************** Récupérer les annonces accepter par le vendeur
+			public JsonObject Driving(int id) {
+
+//				Tester les données envoyé par le client parce qu'on fais pas confiance ;)
+				if (!IsPresent(id)) {
+					return JSonConverter.objectToJson(new Reponse("ko", "Pas d'identifiant pour la recherch "));
+				}
+
+//				Passer à la couche qui communique avec La BDD
+				return JSonConverter.objectToJson(pr.Driving(id));
+			}
 
 // ************************************************** Supprimer une annonce
 	public JsonObject DeleteProduct(int id) {

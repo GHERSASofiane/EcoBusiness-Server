@@ -19,9 +19,14 @@
 	<!-- ******************************************************** -->
 	
 	<servlet>
+		<servlet-name>Driving</servlet-name>
+		<display-name>Driving</display-name> 
+		<servlet-class>controller.Driving</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>SignUp</servlet-name>
-		<display-name>SignUp</display-name>
-		<description></description>
+		<display-name>SignUp</display-name> 
 		<servlet-class>controller.SignUp</servlet-class>
 	</servlet>
 	
@@ -41,7 +46,7 @@
 	
 	
 	
-	<!-- ******************************************************** -->
+	<!-- ******************************************************** -->   
 	
 	<servlet>
 		<servlet-name>AEDGProduct</servlet-name>
@@ -94,6 +99,10 @@
  <!-- *************************************************************************** -->
  
  
+	<servlet-mapping>
+		<servlet-name>Driving</servlet-name>
+		<url-pattern>/Driving</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>AEDGProduct</servlet-name>
 		<url-pattern>/AEDGProduct</url-pattern>

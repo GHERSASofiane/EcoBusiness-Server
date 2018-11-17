@@ -375,6 +375,53 @@ public class ProductDAO {
 
 	}
 
+
+//*************************************************************	Fonction pour récupérer le driving
+		public Reponse Driving(int id) {
+
+			List<ProductDetail> res = new ArrayList<ProductDetail>();
+			ProductDetail tmp;
+
+			try {
+				db = Connexion.getConnection();
+
+				Statement stmt = db.createStatement();
+				ResultSet rs = stmt.executeQuery(
+						"SELECT * FROM Product, Booking, Users WHERE Product.UserId = Users.UserId = AND Booking.UserId = " + id + " AND Product.UserId = Booking.UserId ORDER BY BookingDated DESC ");
+
+				while (rs.next()) {
+					tmp = new ProductDetail();
+					
+					tmp.setProductName(rs.getString("ProductName"));
+					tmp.setProductDate(rs.getString("ProductDate"));
+					tmp.setProductDescription(rs.getString("ProductDescription"));
+					tmp.setProductPicture(rs.getString("ProductPicture"));
+					tmp.setProductId(rs.getInt("ProductId"));
+					tmp.setProductPrice(rs.getString("ProductPrice"));
+					tmp.setProductStatus(rs.getInt("ProductStatus"));
+
+					tmp.setUserId(rs.getInt("UserId"));
+					tmp.setUserName(rs.getString("UserName"));
+					tmp.setUserMail(rs.getString("UserMail"));
+					tmp.setUserAdress(rs.getString("UserAdress"));
+					tmp.setUserPhone(rs.getString("UserPhone"));
+
+					res.add(tmp);
+
+				}
+				stmt.close();
+				db.close();
+
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+				return new Reponse("ko", "Erreur sur le serveur");
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return new Reponse("ko", "Erreur sur le serveur");
+			}
+			return new Reponse("ok", res);
+		}
+		
 //*************************************************************	Fonction utiles
 
 //	Tester si le produit est toujours disponible 
