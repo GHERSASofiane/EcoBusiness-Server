@@ -386,8 +386,8 @@ public class ProductDAO {
 			ResultSet rs = stmt
 					.executeQuery("SELECT * FROM Product WHERE ProductStatus = 0 AND ProductId = " + prod + ";");
 
-			if (rs.next()) {
-				res = true; return res;
+			if (rs.getRow() != 0) {
+				res = true;  
 			}
 			rs.close();
 			stmt.close();
