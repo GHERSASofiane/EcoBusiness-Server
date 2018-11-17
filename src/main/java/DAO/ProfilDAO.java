@@ -119,7 +119,7 @@ public class ProfilDAO {
 				personne.setUserName(rs.getString(3));
 				personne.setUserPhone(rs.getString(5));
 				personne.setUserAddress(rs.getString(6));
-				personne.setUserPicture(rs.getString(9));
+				personne.setUserPicture(rs.getString(8));
 			}
 
 			pst.close();
