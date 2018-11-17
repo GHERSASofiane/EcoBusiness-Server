@@ -67,7 +67,7 @@ public class ProfilServices {
 				if(reponse.getStatus().equals("ok"))
 				{
 					JsonObject res = JSonConverter.objectToJson(reponse);
-					String token = AutorisationAcess.registerToken(prof);
+					String token = AutorisationAcess.registerToken((Personne) reponse.getReponse());
 					res.addProperty("token", token);
 					return res;
 				}
@@ -118,7 +118,7 @@ public class ProfilServices {
 			if(reponse.getStatus().equals("ok"))
 			{
 				JsonObject res = JSonConverter.objectToJson(reponse);
-				String token = AutorisationAcess.registerToken(prof);
+				String token = AutorisationAcess.registerToken((Personne) reponse.getReponse());
 				res.addProperty("token", token);
 				return res;
 			}
@@ -172,7 +172,7 @@ public class ProfilServices {
 			if(reponse.getStatus().equals("ok"))
 			{
 				JsonObject res = JSonConverter.objectToJson(reponse);
-				String token = AutorisationAcess.registerToken(prof);
+				String token = AutorisationAcess.registerToken((Personne) reponse.getReponse());
 				res.addProperty("token", token);
 				return res;
 			}
