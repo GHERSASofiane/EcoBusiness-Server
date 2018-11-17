@@ -134,7 +134,7 @@ public class ProfilDAO {
 			return new Reponse("ko", "Erreur sur le serveur");
 		}
 		
-		return new Reponse("ok", prof);
+		return new Reponse("ok", personne);
 	}
 	
 //	********************* fonction utiles
