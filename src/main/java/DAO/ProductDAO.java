@@ -384,9 +384,10 @@ public class ProductDAO {
 			db = Connexion.getConnection();
 			Statement stmt = db.createStatement();
 			ResultSet rs = stmt
-					.executeQuery("SELECT * FROM Product WHERE ProductStatus = 0 AND ProductId = " + prod + ";");
+					.executeQuery("SELECT COUNT(*) FROM Product WHERE ProductStatus = 0 AND ProductId = " + prod + ";");
 
-			if (rs.getRow() != 0) {
+			
+			if (rs.getInt(1) == 0) {
 				res = true;  
 			}
 			rs.close();
