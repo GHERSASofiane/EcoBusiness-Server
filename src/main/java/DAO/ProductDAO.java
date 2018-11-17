@@ -387,7 +387,7 @@ public class ProductDAO {
 
 				Statement stmt = db.createStatement();
 				ResultSet rs = stmt.executeQuery(
-						"SELECT * FROM Product, Booking, Users WHERE Product.UserId = Users.UserId = AND Booking.UserId = " + id + " AND Product.UserId = Booking.UserId ORDER BY BookingDated DESC ");
+						"SELECT * FROM Product, Booking, Users WHERE Product.userid = Users.UserId  AND Booking.UserId = " + id + " AND Product.UserId = Booking.UserId ORDER BY BookingDated DESC ");
 
 				while (rs.next()) {
 					tmp = new ProductDetail();
@@ -414,10 +414,10 @@ public class ProductDAO {
 
 			} catch (URISyntaxException e) {
 				e.printStackTrace();
-				return new Reponse("ko", "Erreur sur le serveur 1");
+				return new Reponse("ko", "Erreur sur le serveur ");
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return new Reponse("ko", "Erreur sur le serveur 2");
+				return new Reponse("ko", "Erreur sur le serveur ");
 			}
 			return new Reponse("ok", res);
 		}
