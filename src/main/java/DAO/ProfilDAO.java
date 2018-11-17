@@ -211,4 +211,39 @@ public class ProfilDAO {
 		
 		 return res;
 	}
+
+	public boolean getUserWithId(int userId) {
+		try {
+			db = Connexion.getConnection();
+			String res = "select count(*) from users where userId =?;";
+			PreparedStatement pst = db.prepareStatement(res);
+			pst.setInt(1, userId);
+
+			ResultSet rs = pst.executeQuery();
+
+			int count = 0;
+			while (rs.next()) {
+				count = rs.getInt(1);
+			}
+
+			if (count == 0) {
+				db.close();
+				return false;
+
+			}
+
+			db.close();
+		} catch (URISyntaxException e) {
+			
+			e.printStackTrace();
+			return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+			
+		}
+
+		return true;
+	}
+	
 }

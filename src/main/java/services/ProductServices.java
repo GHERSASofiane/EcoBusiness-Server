@@ -6,13 +6,18 @@ package services;
 import java.util.Calendar;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.auth0.jwt.interfaces.Claim;
 import com.google.gson.JsonObject;
 
 import DAO.ProductDAO;
+import DAO.ProfilDAO;
 import converters.JSonConverter;
 import models.Product;
 import models.Reservation;
 import status.Reponse;
+import tokens.AutorisationAcess;
 
 /**
  *
@@ -214,5 +219,8 @@ public class ProductServices {
 
 		return Mydate;
 	}
-
+	
+	
+	
+	
 }

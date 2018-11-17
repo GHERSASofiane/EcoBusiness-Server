@@ -17,6 +17,8 @@ import converters.JSonConverter;
 import helpers.Readers;
 import models.Product;
 import services.ProductServices;
+import status.Reponse;
+import tokens.AutorisationAcess;
 
 /**
  *
@@ -36,16 +38,35 @@ public class AEDGProduct extends HttpServlet {
 			throws ServletException, IOException {
 		// Récuperer le PrintWriter Pour envoyer la réponse
 		PrintWriter resp = response.getWriter();
-		// transférer les données de la requête en Json
-		JsonObject jsObj = Readers.getJSONfromRequest(request);
-		// extraire les données qu'on a besoin
-		models.Product product = new models.Product();
-		product = (models.Product) JSonConverter.objectFromJson(jsObj, product);
+		
+		
+		
+        JsonObject result = new JsonObject();
+        
+        if(!AutorisationAcess.isTokenExist(request))
+        {
+        	result = JSonConverter.objectToJson(new Reponse("ko", "user not logged in"));
+        }
+        else
+        {
+        
+        	// transférer les données de la requête en Json
+    		JsonObject jsObj = Readers.getJSONfromRequest(request);
+    		// extraire les données qu'on a besoin
+    		models.Product product = new models.Product();
+    		product = (models.Product) JSonConverter.objectFromJson(jsObj, product);
 
-		// Préparer la réponse
-		ProductServices rep = new ProductServices();
+    		// Préparer la réponse
+    		ProductServices rep = new ProductServices();
+    		
+    		result = rep.addProduct(product);
+        }
+        
+		
+		
+		
 		// Envoie de réponse au client
-		resp.println(rep.addProduct(product));
+		resp.println(result);
 		resp.flush();
 
 	}
@@ -56,17 +77,31 @@ public class AEDGProduct extends HttpServlet {
 			throws ServletException, IOException {
 		// Récuperer le PrintWriter Pour envoyer la réponse
 		PrintWriter resp = response.getWriter();
-		// transférer les données de la requête en Json
-		JsonObject jsObj = Readers.getJSONfromRequest(request);
-		// extraire les données qu'on a besoin
-		Product product = new Product();
-		product = (Product) JSonConverter.objectFromJson(jsObj, product);
+		
+		
+JsonObject result = new JsonObject();
+        
+        if(!AutorisationAcess.isTokenExist(request))
+        {
+        	result = JSonConverter.objectToJson(new Reponse("ko", "user not logged in"));
+        }
+        else
+        {
+        
+        	// transférer les données de la requête en Json
+    		JsonObject jsObj = Readers.getJSONfromRequest(request);
+    		// extraire les données qu'on a besoin
+    		Product product = new Product();
+    		product = (Product) JSonConverter.objectFromJson(jsObj, product);
 
-		// Préparer la réponse
-		ProductServices rep = new ProductServices();
-
+    		// Préparer la réponse
+    		ProductServices rep = new ProductServices();
+    		result = rep.EditProduct(product);
+        }
+		
+		
 		// Envoie de réponse
-		resp.println(rep.EditProduct(product));
+		resp.println(result);
 		resp.flush();
 
 	}
@@ -76,13 +111,27 @@ public class AEDGProduct extends HttpServlet {
 	protected void doDelete(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 		// Récuperer le PrintWriter Pour envoyer la réponse
 		PrintWriter resp = response.getWriter();
-		// extraire les données qu'on a besoin
-		int idProduct = Integer.parseInt(req.getParameter("idProduct"));
+		
+		
+		JsonObject result = new JsonObject();
+        
+        if(!AutorisationAcess.isTokenExist(req))
+        {
+        	result = JSonConverter.objectToJson(new Reponse("ko", "user not logged in"));
+        }
+        else
+        {
+        
+        	// extraire les données qu'on a besoin
+    		int idProduct = Integer.parseInt(req.getParameter("idProduct"));
 
-		// Préparer la réponse
-		ProductServices rep = new ProductServices();
+    		// Préparer la réponse
+    		ProductServices rep = new ProductServices();
+    		result = rep.DeleteProduct(idProduct);
+        }
+		
 		// Envoie de réponse
-		resp.println(rep.DeleteProduct(idProduct));
+		resp.println(result);
 		resp.flush();
 	}
 

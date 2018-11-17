@@ -13,7 +13,9 @@ import com.google.gson.JsonObject;
 import converters.JSonConverter;
 import helpers.Readers;
 import models.Personne;
+import services.ProductServices;
 import services.ProfilServices;
+import status.Reponse;
 import tokens.AutorisationAcess;
 
 /**
@@ -36,19 +38,27 @@ public class EditProfile extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		JsonObject jsObj = Readers.getJSONfromRequest(request);
-		 
-		 Personne personne = new Personne();
-		 personne = (Personne) JSonConverter.objectFromJson(jsObj, personne);
-		  
-		ProfilServices pers = new ProfilServices();
-		JsonObject obj = pers.update(personne);
-				 
-		PrintWriter pw = response.getWriter();
 		
-		String token = AutorisationAcess.registerToken(personne);
-		obj.addProperty("token", token);
-		pw.println(obj);
+		JsonObject result = new JsonObject();
+        
+        if(!AutorisationAcess.isTokenExist(request))
+        {
+        	result = JSonConverter.objectToJson(new Reponse("ko", "user not logged in"));
+        }
+        else
+        {
+        
+        	JsonObject jsObj = Readers.getJSONfromRequest(request);
+   		 
+   		 Personne personne = new Personne();
+   		 personne = (Personne) JSonConverter.objectFromJson(jsObj, personne); 
+   		 ProfilServices pers = new ProfilServices();
+   		 result = pers.update(personne);
+        }
+		
+		
+		PrintWriter pw = response.getWriter();
+		pw.println(result);
 		pw.flush();
 	}
 
