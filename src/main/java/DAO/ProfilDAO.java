@@ -99,24 +99,31 @@ public class ProfilDAO {
 		if( !isMailExiste(prof.getUserMail()) ) return new Reponse("ko", "le mail n'existe deja "); 
 		if( !isMailPass(prof.getUserMail(), prof.getUserPassword()) ) return new Reponse("ko", "le mot de passe est incorrect "); 
 		
+		Personne personne = new Personne();
+		
 		try {
 			db = Connexion.getConnection();
 
-			Statement stmt = db.createStatement();
-			ResultSet rs = stmt
-					.executeQuery("SELECT * FROM Users WHERE UserMail = '"+prof.getUserMail()+"' AND UserPassword = '"+prof.getUserPassword()+"';");
+			
+
+			String res = "select * from users where userMail =? and userPassword=?;";
+			PreparedStatement pst = db.prepareStatement(res);
+			pst.setString(1, prof.getUserMail());
+			pst.setString(2, prof.getUserPassword());
+			ResultSet rs = pst.executeQuery();
+
 			while (rs.next()) {
 
-				prof.setUserId(rs.getInt("UserId")); 
-				prof.setUserName(rs.getString("UserName")); 
-				prof.setUserPhone(rs.getString("UserPhone")); 
-				prof.setUserAddress(rs.getString("UserAdress")); 
-				prof.setUserKey(rs.getString("UserKey")); 
-				prof.setUserPicture(rs.getString("UserPicture")); 
- 				  
+				personne.setUserId(rs.getInt(1));
+				personne.setUserMail(rs.getString(2));
+				personne.setUserName(rs.getString(3));
+				personne.setUserPhone(rs.getString(5));
+				personne.setUserAddress(rs.getString(6));
+				personne.setUserPicture(rs.getString(9));
 			}
+
+			pst.close();
 			rs.close();
-			stmt.close();
 			db.close();
 
 		} catch (URISyntaxException e) {
