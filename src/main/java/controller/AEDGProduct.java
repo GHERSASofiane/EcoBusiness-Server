@@ -143,14 +143,7 @@ JsonObject result = new JsonObject();
 		PrintWriter resp = response.getWriter();
 
         JsonObject result = new JsonObject();
-        
-//        Securisé avec le token rien ne passe sans le token valide
-        if(!AutorisationAcess.isTokenExist(request))
-        {
-        	result = JSonConverter.objectToJson(new Reponse("ko", "Dec"));
-        }
-        else
-        {
+ 
         	// extraire les données qu'on a besoin
     		String PName = request.getParameter("ProductName");
     		String Page = request.getParameter("Page");
@@ -168,8 +161,7 @@ JsonObject result = new JsonObject();
     		// Préparer la répense
     		ProductServices rep = new ProductServices();
         	result = rep.searchProduct(PName, p);
-        }
-
+       
 
 
 		// Envoie de réponse
