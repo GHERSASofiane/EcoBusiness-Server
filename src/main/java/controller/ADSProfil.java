@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.JsonObject;
 
 import converters.JSonConverter;
+import emailOperations.EmailVerification;
 import helpers.Readers;
+import models.Personne;
 import services.ProfilServices;
 import status.Reponse;
 import tokens.AutorisationAcess;
@@ -33,33 +35,41 @@ public class ADSProfil extends HttpServlet {
 //	crée un compte
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Récuperer le PrintWriter Pour envoyer la réponse
-		PrintWriter resp = response.getWriter();
-
-
-        JsonObject result = new JsonObject();
-        
-//        Securisé avec le token rien ne passe sans le token valide
-        if(!AutorisationAcess.isTokenExist(request))
-        {
-        	result = JSonConverter.objectToJson(new Reponse("ko", "Dec"));
-        }
-        else
-        {
-    		JsonObject jsObj = Readers.getJSONfromRequest(request);
-
-    		models.Personne prof = new models.Personne();
-    		prof = (models.Personne) JSonConverter.objectFromJson(jsObj, prof); 
-    		
-    		ProfilServices PrServ = new ProfilServices();
-        	result = PrServ.Registration(prof);
-        }
-
-
-
-		// Envoie de réponse
-		resp.println(result);
-		resp.flush();
+		
+		JsonObject jsObj = Readers.getJSONfromRequest(request);
+		 
+		 Personne personne = new Personne();
+		 personne = (Personne) JSonConverter.objectFromJson(jsObj, personne);
+		  
+		 JsonObject obj;
+		 
+		 try
+		 {
+		 if(EmailVerification.isAddressValid(personne.getUserMail())) {
+			 ProfilServices pers = new ProfilServices();
+			 obj = pers.signUp(personne);
+		 }
+		 else
+		 {
+			 obj = JSonConverter.objectToJson(new Reponse("ko", personne.getUserMail() + "not vailde"));
+		 }
+		 } catch(Exception e)
+		 {
+			 obj = JSonConverter.objectToJson(new Reponse("ko", personne.getUserMail() + "not vailde")); 
+		 }
+		  
+		
+		PrintWriter pw = response.getWriter();
+		
+		
+		
+		String token = AutorisationAcess.registerToken(personne);
+		obj.addProperty("token", token);
+		pw.println(obj);
+		pw.flush();
+		
+		
+		 
 	}
 
 	
