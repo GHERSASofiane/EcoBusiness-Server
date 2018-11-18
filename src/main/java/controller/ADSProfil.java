@@ -16,6 +16,7 @@ import converters.JSonConverter;
 import helpers.Readers;
 import services.ProfilServices;
 import status.Reponse;
+import tokens.AutorisationAcess;
 
 /**
  *
@@ -35,14 +36,29 @@ public class ADSProfil extends HttpServlet {
 		// Récuperer le PrintWriter Pour envoyer la réponse
 		PrintWriter resp = response.getWriter();
 
-		JsonObject jsObj = Readers.getJSONfromRequest(request);
 
-		models.Personne prof = new models.Personne();
-		prof = (models.Personne) JSonConverter.objectFromJson(jsObj, prof); 
-		
-		ProfilServices PrServ = new ProfilServices();
+        JsonObject result = new JsonObject();
+        
+//        Securisé avec le token rien ne passe sans le token valide
+        if(!AutorisationAcess.isTokenExist(request))
+        {
+        	result = JSonConverter.objectToJson(new Reponse("ko", "Dec"));
+        }
+        else
+        {
+    		JsonObject jsObj = Readers.getJSONfromRequest(request);
+
+    		models.Personne prof = new models.Personne();
+    		prof = (models.Personne) JSonConverter.objectFromJson(jsObj, prof); 
+    		
+    		ProfilServices PrServ = new ProfilServices();
+        	result = PrServ.Registration(prof);
+        }
+
+
+
 		// Envoie de réponse
-		resp.println(PrServ.Registration(prof));
+		resp.println(result);
 		resp.flush();
 	}
 

@@ -11,7 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.JsonObject;
+
+import converters.JSonConverter;
 import services.ProductServices;
+import status.Reponse;
+import tokens.AutorisationAcess;
 
 /**
  *
@@ -30,13 +35,24 @@ public class MyPubs extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 		// Récuperer le PrintWriter Pour envoyer la réponse
 		PrintWriter resp = response.getWriter();
-		// Récuperer le ID de l'utilisateur
-		int idUser = Integer.parseInt(req.getParameter("idUser"));
 
-		// Préparer la répense
-		ProductServices rep = new ProductServices();
+		JsonObject result = new JsonObject();
+
+//        Securisé avec le token rien ne passe sans le token valide
+		if (!AutorisationAcess.isTokenExist(req)) {
+			result = JSonConverter.objectToJson(new Reponse("ko", "Dec"));
+		} else {
+
+			// Récuperer le ID de l'utilisateur
+			int idUser = Integer.parseInt(req.getParameter("idUser"));
+
+			// Préparer la répense
+			ProductServices rep = new ProductServices();
+			result = rep.MyPubs(idUser);
+		}
+
 		// Envoie de réponse
-		resp.println(rep.MyPubs(idUser));
+		resp.println(result);
 		resp.flush();
 
 	}

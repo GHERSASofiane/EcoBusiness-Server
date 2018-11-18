@@ -11,7 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.JsonObject;
+
+import converters.JSonConverter;
 import services.ProductServices;
+import status.Reponse;
+import tokens.AutorisationAcess;
 
 /**
  *
@@ -27,23 +32,34 @@ public class Driving extends HttpServlet {
 
 //**************************************************	méthode do get
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// Récuperer le PrintWriter Pour envoyer la réponse
 		PrintWriter resp = response.getWriter();
 
-		// extraire les données qu'on a besoin id de user
-		String Id = request.getParameter("id"); 
-		if (Id == null) {
-			Id = "";
-		} 
+		JsonObject result = new JsonObject();
 
-		Id = Id.toLowerCase(); 
-		int id = Integer.parseInt(Id);
+//        Securisé avec le token rien ne passe sans le token valide
+		if (!AutorisationAcess.isTokenExist(request)) {
+			result = JSonConverter.objectToJson(new Reponse("ko", "Dec"));
+		} else {
 
-		// Préparer la répense
-		ProductServices rep = new ProductServices();
+			// extraire les données qu'on a besoin id de user
+			String Id = request.getParameter("id");
+			if (Id == null) {
+				Id = "";
+			}
+
+			Id = Id.toLowerCase();
+			int id = Integer.parseInt(Id);
+
+			// Préparer la répense
+			ProductServices rep = new ProductServices();
+			result = rep.Driving(id);
+		}
+
 		// Envoie de réponse
-		resp.println(rep.Driving(id));
+		resp.println(result);
 		resp.flush();
 	}
 }

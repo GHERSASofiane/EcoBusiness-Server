@@ -17,6 +17,8 @@ import converters.JSonConverter;
 import helpers.Readers;
 import models.Reservation;
 import services.ProductServices;
+import status.Reponse;
+import tokens.AutorisationAcess;
 
 /**
  *
@@ -36,16 +38,27 @@ public class ReservationValidate extends HttpServlet {
 			throws ServletException, IOException {
 		// Récuperer le PrintWriter Pour envoyer la réponse
 		PrintWriter resp = response.getWriter();
-		// transférer les données de la requête en Json
-		JsonObject jsObj = Readers.getJSONfromRequest(request);
-		// extraire les données qu'on a besoin
-		Reservation reserv = new Reservation();
-		reserv = (Reservation) JSonConverter.objectFromJson(jsObj, reserv);
 
-		// Préparer la réponse
-		ProductServices rep = new ProductServices();
+		JsonObject result = new JsonObject();
+
+//        Securisé avec le token rien ne passe sans le token valide
+		if (!AutorisationAcess.isTokenExist(request)) {
+			result = JSonConverter.objectToJson(new Reponse("ko", "Dec"));
+		} else {
+
+			// transférer les données de la requête en Json
+			JsonObject jsObj = Readers.getJSONfromRequest(request);
+			// extraire les données qu'on a besoin
+			Reservation reserv = new Reservation();
+			reserv = (Reservation) JSonConverter.objectFromJson(jsObj, reserv);
+
+			// Préparer la réponse
+			ProductServices rep = new ProductServices();
+			result = rep.ReservationValidate(reserv);
+		}
+
 		// Envoie de réponse
-		resp.println(rep.ReservationValidate(reserv));
+		resp.println(result);
 		resp.flush();
 
 	}

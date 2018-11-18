@@ -45,7 +45,7 @@ public class AEDGProduct extends HttpServlet {
         
         if(!AutorisationAcess.isTokenExist(request))
         {
-        	result = JSonConverter.objectToJson(new Reponse("ko", "user not logged in"));
+        	result = JSonConverter.objectToJson(new Reponse("ko", "Dec"));
         }
         else
         {
@@ -83,7 +83,7 @@ JsonObject result = new JsonObject();
         
         if(!AutorisationAcess.isTokenExist(request))
         {
-        	result = JSonConverter.objectToJson(new Reponse("ko", "user not logged in"));
+        	result = JSonConverter.objectToJson(new Reponse("ko", "Dec"));
         }
         else
         {
@@ -117,7 +117,7 @@ JsonObject result = new JsonObject();
         
         if(!AutorisationAcess.isTokenExist(req))
         {
-        	result = JSonConverter.objectToJson(new Reponse("ko", "user not logged in"));
+        	result = JSonConverter.objectToJson(new Reponse("ko", "Dec"));
         }
         else
         {
@@ -142,24 +142,38 @@ JsonObject result = new JsonObject();
 		// Récuperer le PrintWriter Pour envoyer la réponse
 		PrintWriter resp = response.getWriter();
 
-		// extraire les données qu'on a besoin
-		String PName = request.getParameter("ProductName");
-		String Page = request.getParameter("Page");
-		if (PName == null) {
-			PName = "";
-		}
-		if (Page == null) {
-			Page = "0";
-		}
+        JsonObject result = new JsonObject();
+        
+//        Securisé avec le token rien ne passe sans le token valide
+        if(!AutorisationAcess.isTokenExist(request))
+        {
+        	result = JSonConverter.objectToJson(new Reponse("ko", "Dec"));
+        }
+        else
+        {
+        	// extraire les données qu'on a besoin
+    		String PName = request.getParameter("ProductName");
+    		String Page = request.getParameter("Page");
+    		if (PName == null) {
+    			PName = "";
+    		}
+    		if (Page == null) {
+    			Page = "0";
+    		}
 
-		PName = PName.toLowerCase();
-		Page = Page.toLowerCase();
-		int p = Integer.parseInt(Page);
+    		PName = PName.toLowerCase();
+    		Page = Page.toLowerCase();
+    		int p = Integer.parseInt(Page);
 
-		// Préparer la répense
-		ProductServices rep = new ProductServices();
+    		// Préparer la répense
+    		ProductServices rep = new ProductServices();
+        	result = rep.searchProduct(PName, p);
+        }
+
+
+
 		// Envoie de réponse
-		resp.println(rep.searchProduct(PName, p));
+		resp.println(result); 
 		resp.flush();
 	}
 
