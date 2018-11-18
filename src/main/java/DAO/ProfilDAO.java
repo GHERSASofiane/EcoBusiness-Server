@@ -22,7 +22,7 @@ public class ProfilDAO {
 // update profile
 	public Reponse update(Personne prof)
 	{
-			if( isMailExiste(prof.getUserMail()) ) return new Reponse("ko", "le mail existe deja ");
+			if( !isMailExiste(prof.getUserMail()) ) return new Reponse("ko", "le mail n'existe pas ");
 			if( isTelExiste(prof.getUserPhone()) ) return new Reponse("ko", "le Phone existe deja ");
 			
 			try {
