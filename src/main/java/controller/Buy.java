@@ -50,8 +50,6 @@ public class Buy extends HttpServlet {
 	        else
 	        {
 	        
-	        	// transférer les données de la requête en Json
-	    		JsonObject jsObj = Readers.getJSONfromRequest(request);
 	    		// extraire les données qu'on a besoin 
 	    		String ID = request.getParameter("id"); 
 	    		if (ID == null) {
