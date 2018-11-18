@@ -32,7 +32,7 @@ public class ProfilDAO {
 				PreparedStatement preparedStmt = db.prepareStatement(query);
 				preparedStmt.setString(1, prof.getUserMail() );
 				preparedStmt.setString(2, prof.getUserName() );
-				preparedStmt.setString(3, prof.getUserPassword() );
+				preparedStmt.setString(3, prof.getUserPassword() ); 
 				preparedStmt.setString(4, prof.getUserPhone() );
 				preparedStmt.setString(5, prof.getUserAddress() );
 				preparedStmt.setString(6, prof.getUserKey() );
