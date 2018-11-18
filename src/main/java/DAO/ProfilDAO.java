@@ -27,7 +27,7 @@ public class ProfilDAO {
 			
 			try {
 				db = Connexion.getConnection();
-				String query = "UPDATE users SET (userMail, userName, userPassword, userPhone, userAdress, userKey, userprofilepicture) = (?,?,?,?,?,?,?)"
+				String query = "UPDATE users SET (userMail, userName, userPassword, userPhone, userAdress, userKey, userpicture) = (?,?,?,?,?,?,?)"
 						+ "  WHERE userId = ?;";
 				PreparedStatement preparedStmt = db.prepareStatement(query);
 				preparedStmt.setString(1, prof.getUserMail() );
