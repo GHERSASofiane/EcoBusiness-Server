@@ -376,84 +376,131 @@ public class ProductDAO {
 	}
 
 //*************************************************************	cette fonction pour valider l'achat d'un produit par le client
-		public Reponse Buy(int id) {
+	public Reponse Buy(int id) {
 
-			// tester si l'annance est toujours disponible pour la Concurrence
-			if (!isProductDis(id)) {
-				return new Reponse("ko", "l'annance n'est plus disponible");
-			}
-			
-			try {
-
-				db = Connexion.getConnection();
-
-				// changer le status
-				String path = "UPDATE Product SET ProductStatus = 2 WHERE ProductId = ?;";
-				PreparedStatement preparedStmt = db.prepareStatement(path);
-				preparedStmt.setInt(1, id);
-				preparedStmt.execute();
- 
-				preparedStmt.close();
-				db.close();
-
-			} catch (URISyntaxException e) {
-				e.printStackTrace();
-				return new Reponse("ko", "votre Validation n'a pas pu etre valider");
-			} catch (SQLException e) {
-				e.printStackTrace();
-				return new Reponse("ko", "votre Validation n'a pas pu etre valider");
-			}
-
-			return new Reponse("ok", "L'operation de Validation est bien passer :) :) ");
-
+		// tester si l'annance est toujours disponible pour la Concurrence
+		if (!isProductDis(id)) {
+			return new Reponse("ko", "l'annance n'est plus disponible");
 		}
 
-//*************************************************************	Fonction pour récupérer le driving
-		public Reponse Driving(int id) {
+		try {
 
-			List<ProductDetail> res = new ArrayList<ProductDetail>();
-			ProductDetail tmp;
+			db = Connexion.getConnection();
 
-			try {
-				db = Connexion.getConnection();
+			// changer le status
+			String path = "UPDATE Product SET ProductStatus = 2 WHERE ProductId = ?;";
+			PreparedStatement preparedStmt = db.prepareStatement(path);
+			preparedStmt.setInt(1, id);
+			preparedStmt.execute();
 
-				Statement stmt = db.createStatement();
-				ResultSet rs = stmt.executeQuery(
-						"SELECT * FROM Product, Booking, Users WHERE Product.userid = Users.UserId AND Product.ProductStatus = 1 AND Product.ProductId = Booking.ProductId AND Booking.UserId = " + id + "  ORDER BY BookingDated DESC ");
+			preparedStmt.close();
+			db.close();
 
-				while (rs.next()) {
-					tmp = new ProductDetail();
-					
-					tmp.setProductName(rs.getString("ProductName"));
-					tmp.setProductDate(rs.getString("ProductDate"));
-					tmp.setProductDescription(rs.getString("ProductDescription"));
-					tmp.setProductPicture(rs.getString("ProductPicture"));
-					tmp.setProductId(rs.getInt("ProductId"));
-					tmp.setProductPrice(rs.getString("ProductPrice"));
-					tmp.setProductStatus(rs.getInt("ProductStatus"));
-
-					tmp.setUserId(rs.getInt("UserId"));
-					tmp.setUserName(rs.getString("UserName"));
-					tmp.setUserMail(rs.getString("UserMail"));
-					tmp.setUserAdress(rs.getString("UserAdress"));
-					tmp.setUserPhone(rs.getString("UserPhone"));
-
-					res.add(tmp);
-
-				}
-				stmt.close();
-				db.close();
-
-			} catch (URISyntaxException e) {
-				e.printStackTrace();
-				return new Reponse("ko", "Erreur sur le serveur ");
-			} catch (SQLException e) {
-				e.printStackTrace();
-				return new Reponse("ko", "Erreur sur le serveur ");
-			}
-			return new Reponse("ok", res);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			return new Reponse("ko", "votre Validation n'a pas pu etre valider");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new Reponse("ko", "votre Validation n'a pas pu etre valider");
 		}
-		
+
+		return new Reponse("ok", "L'operation de Validation est bien passer :) :) ");
+
+	}
+
+	// ************************************************************* Fonction pour
+	// récupérer l'historique
+	public Reponse History(int id) {
+
+		List<Product> res = new ArrayList<Product>();
+		Product tmp;
+
+		try {
+			db = Connexion.getConnection();
+
+			Statement stmt = db.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM Product, Users WHERE Product.userid = Users.UserId AND Product.ProductStatus = 2 AND Users.UserId = "
+							+ id + "  ORDER BY ProductDate DESC ");
+
+			while (rs.next()) {
+				tmp = new ProductDetail();
+
+				tmp.setProductName(rs.getString("ProductName"));
+				tmp.setProductDate(rs.getString("ProductDate"));
+				tmp.setProductDescription(rs.getString("ProductDescription"));
+				tmp.setProductPicture(rs.getString("ProductPicture"));
+				tmp.setProductId(rs.getInt("ProductId"));
+				tmp.setProductPrice(rs.getString("ProductPrice"));
+				tmp.setProductStatus(rs.getInt("ProductStatus"));
+
+				tmp.setUserId(rs.getInt("UserId"));
+				tmp.setUserName(rs.getString("UserName")); 
+
+				res.add(tmp);
+
+			}
+			stmt.close();
+			db.close();
+
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			return new Reponse("ko", "Erreur sur le serveur ");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new Reponse("ko", "Erreur sur le serveur ");
+		}
+		return new Reponse("ok", res);
+	}
+
+	// ************************************************************* Fonction pour
+	// récupérer le driving
+	public Reponse Driving(int id) {
+
+		List<ProductDetail> res = new ArrayList<ProductDetail>();
+		ProductDetail tmp;
+
+		try {
+			db = Connexion.getConnection();
+
+			Statement stmt = db.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM Product, Booking, Users WHERE Product.userid = Users.UserId AND Product.ProductStatus = 1 AND Product.ProductId = Booking.ProductId AND Booking.UserId = "
+							+ id + "  ORDER BY BookingDated DESC ");
+
+			while (rs.next()) {
+				tmp = new ProductDetail();
+
+				tmp.setProductName(rs.getString("ProductName"));
+				tmp.setProductDate(rs.getString("ProductDate"));
+				tmp.setProductDescription(rs.getString("ProductDescription"));
+				tmp.setProductPicture(rs.getString("ProductPicture"));
+				tmp.setProductId(rs.getInt("ProductId"));
+				tmp.setProductPrice(rs.getString("ProductPrice"));
+				tmp.setProductStatus(rs.getInt("ProductStatus"));
+
+				tmp.setUserId(rs.getInt("UserId"));
+				tmp.setUserName(rs.getString("UserName"));
+				tmp.setUserMail(rs.getString("UserMail"));
+				tmp.setUserAdress(rs.getString("UserAdress"));
+				tmp.setUserPhone(rs.getString("UserPhone"));
+
+				res.add(tmp);
+
+			}
+			stmt.close();
+			db.close();
+
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			return new Reponse("ko", "Erreur sur le serveur ");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new Reponse("ko", "Erreur sur le serveur ");
+		}
+		return new Reponse("ok", res);
+	}
+
 //*************************************************************	Fonction utiles
 
 //	Tester si le produit est toujours disponible 
@@ -462,14 +509,12 @@ public class ProductDAO {
 		try {
 			db = Connexion.getConnection();
 			Statement stmt = db.createStatement();
-			ResultSet rs = stmt
-					.executeQuery("SELECT COUNT(*) FROM Product WHERE ProductId = " + prod + ";");
+			ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Product WHERE ProductId = " + prod + ";");
 
-			
-			while(rs.next()) {
-				res = true;  
+			while (rs.next()) {
+				res = true;
 			}
-			
+
 			rs.close();
 			stmt.close();
 			db.close();

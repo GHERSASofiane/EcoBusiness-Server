@@ -50,6 +50,12 @@
 		<servlet-class>controller.Buy</servlet-class>
 	</servlet>
 	
+	<servlet>
+		<servlet-name>History</servlet-name>
+		<display-name>History</display-name> 
+		<servlet-class>controller.History</servlet-class>
+	</servlet>
+	
 	
 	
 	<!-- ******************************************************** -->   
@@ -105,6 +111,10 @@
  <!-- *************************************************************************** -->
  
  
+	<servlet-mapping>
+		<servlet-name>History</servlet-name>
+		<url-pattern>/History</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Buy</servlet-name>
 		<url-pattern>/Buy</url-pattern>

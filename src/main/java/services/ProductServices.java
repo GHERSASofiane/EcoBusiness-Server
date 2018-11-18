@@ -66,41 +66,56 @@ public class ProductServices {
 		return JSonConverter.objectToJson(pr.addProduct(product));
 	}
 
-	// ************************************************** Récupérer les annonces publier par l'utilisateur courant
-			public JsonObject MyPubs(int id) {
+	// ************************************************** Récupérer les annonces
+	// publier par l'utilisateur courant
+	public JsonObject MyPubs(int id) {
 
 //				Tester les données envoyé par le client parce qu'on fais pas confiance ;)
-				if (!IsPresent(id)) {
-					return JSonConverter.objectToJson(new Reponse("ko", "Pas d'identifiant pour la recherch "));
-				}
+		if (!IsPresent(id)) {
+			return JSonConverter.objectToJson(new Reponse("ko", "Pas d'identifiant pour la recherch "));
+		}
 
 //				Passer à la couche qui communique avec La BDD
-				return JSonConverter.objectToJson(pr.MyPubs(id));
-			}
+		return JSonConverter.objectToJson(pr.MyPubs(id));
+	}
 
-// ************************************************** Récupérer les annonces publier par l'utilisateur courant
-					public JsonObject Buy(int id) {
+	// ************************************************** Récupérer les annonces
+	// publier par l'utilisateur courant
+	public JsonObject Buy(int id) {
 
-//						Tester les données envoyé par le client parce qu'on fais pas confiance ;)
-						if (!IsPresent(id)) {
-							return JSonConverter.objectToJson(new Reponse("ko", "Pas d'identifiant pour la validation "));
-						}
+//									Tester les données envoyé par le client parce qu'on fais pas confiance ;)
+		if (!IsPresent(id)) {
+			return JSonConverter.objectToJson(new Reponse("ko", "Pas d'identifiant pour la validation "));
+		}
 
-//						Passer à la couche qui communique avec La BDD
-						return JSonConverter.objectToJson(pr.Buy(id));
-					}
+//									Passer à la couche qui communique avec La BDD
+		return JSonConverter.objectToJson(pr.Buy(id));
+	}
+
+	// ************************************************** Récupérer les annonces
+	// publier par l'utilisateur courant
+	public JsonObject History(int id) {
+
+//														Tester les données envoyé par le client parce qu'on fais pas confiance ;)
+		if (!IsPresent(id)) {
+			return JSonConverter.objectToJson(new Reponse("ko", "Pas d'identifiant pour la validation "));
+		}
+
+//														Passer à la couche qui communique avec La BDD
+		return JSonConverter.objectToJson(pr.History(id));
+	}
 
 // ************************************************** Récupérer les annonces accepter par le vendeur
-			public JsonObject Driving(int id) {
+	public JsonObject Driving(int id) {
 
 //				Tester les données envoyé par le client parce qu'on fais pas confiance ;)
-				if (!IsPresent(id)) {
-					return JSonConverter.objectToJson(new Reponse("ko", "Pas d'identifiant pour la recherch "));
-				}
+		if (!IsPresent(id)) {
+			return JSonConverter.objectToJson(new Reponse("ko", "Pas d'identifiant pour la recherch "));
+		}
 
 //				Passer à la couche qui communique avec La BDD
-				return JSonConverter.objectToJson(pr.Driving(id));
-			}
+		return JSonConverter.objectToJson(pr.Driving(id));
+	}
 
 // ************************************************** Supprimer une annonce
 	public JsonObject DeleteProduct(int id) {
@@ -169,7 +184,7 @@ public class ProductServices {
 		if (!IsPresent(reserv.getReservationSend())) {
 			return JSonConverter.objectToJson(new Reponse("ko", "getReservationSend  est obligatoire "));
 		}
-		
+
 //		Passer à la couche qui communique avec La BDD
 		return JSonConverter.objectToJson(pr.addReservation(reserv));
 	}
@@ -181,7 +196,7 @@ public class ProductServices {
 		if (!IsPresent(id)) {
 			return JSonConverter.objectToJson(new Reponse("ko", "ID  est obligatoire "));
 		}
-		
+
 //		Passer à la couche qui communique avec La BDD
 		return JSonConverter.objectToJson(pr.GetReservationReq(id));
 	}
@@ -193,7 +208,7 @@ public class ProductServices {
 		if (!IsPresent(reserv.getProductId())) {
 			return JSonConverter.objectToJson(new Reponse("ko", "ID  est obligatoire "));
 		}
-		
+
 //		Passer à la couche qui communique avec La BDD
 		return JSonConverter.objectToJson(pr.ReservationValidate(reserv));
 	}
@@ -231,8 +246,5 @@ public class ProductServices {
 
 		return Mydate;
 	}
-	
-	
-	
-	
+
 }
