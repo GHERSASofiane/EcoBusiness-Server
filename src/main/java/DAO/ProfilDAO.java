@@ -23,11 +23,11 @@ public class ProfilDAO {
 	public Reponse update(Personne prof)
 	{
 			if( !isMailExiste(prof.getUserMail()) ) return new Reponse("ko", "le mail n'existe pas ");
-			if( isTelExiste(prof.getUserPhone()) ) return new Reponse("ko", "le Phone existe deja ");
+		
 			
 			try {
 				db = Connexion.getConnection();
-				String query = "UPDATE users SET (userMail, userName, userPassword, userPhone, userAdress, userKey, userprofilepicture) = (?,?,?,?,?,?)"
+				String query = "UPDATE users SET (userMail, userName, userPassword, userPhone, userAdress, userKey, userprofilepicture) = (?,?,?,?,?,?,?)"
 						+ "  WHERE userId = ?;";
 				PreparedStatement preparedStmt = db.prepareStatement(query);
 				preparedStmt.setString(1, prof.getUserMail() );
