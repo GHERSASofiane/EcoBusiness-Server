@@ -62,7 +62,7 @@ public class Buy extends HttpServlet {
 	    		// Préparer la réponse
 	    		ProductServices rep = new ProductServices();
 	    		
-	    		result = JSonConverter.objectToJson( new Reponse("ok", "voila le id : "+id) ) ; // rep.Buy(id);
+	    		result = rep.Buy(id);
 	        }
 	        
 			
