@@ -201,7 +201,7 @@ public class ProductDAO {
 
 		// tester si l'annance est toujours disponible pour la Concurrence
 		if (!isProductDis(productId)) {
-			return new Reponse("ko", "l'annance n'est plus disponible");
+			return new Reponse("ko", "The product is is no longer available");
 		}
 
 		ProductDetail tmpProd = new ProductDetail();
@@ -233,10 +233,10 @@ public class ProductDAO {
 
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "Erreur sur le serveur");
+			return new Reponse("ko", "Server error");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "Erreur sur le serveur");
+			return new Reponse("ko", "Server error");
 		}
 
 		return new Reponse("ok", tmpProd);
