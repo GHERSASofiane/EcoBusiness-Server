@@ -186,13 +186,13 @@ public class ProductDAO {
 
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "votre produit n'a pas pu etre modifier ");
+			return new Reponse("ko", "Couldn't modify yout product");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "votre produit n'a pas pu etre modifier ");
+			return new Reponse("ko", "Couldn't modify your product ");
 		}
 
-		return new Reponse("ok", " votre produit est modifier avec succes ");
+		return new Reponse("ok", " Your product was modified ");
 
 	}
 
