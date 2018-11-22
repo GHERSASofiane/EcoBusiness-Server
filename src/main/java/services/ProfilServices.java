@@ -24,28 +24,28 @@ public class ProfilServices {
 			
 
 			if (!IsPresent(prof.getUserName()) || (prof.getUserName().length()<3) ) {
-				return JSonConverter.objectToJson(new Reponse("ko", "getUserName  est obligatoire "));
+				return JSonConverter.objectToJson(new Reponse("ko", "You should enter your name "));
 			}
 			if (!IsPresent(prof.getUserMail())) {
-				return JSonConverter.objectToJson(new Reponse("ko", "getUserMail  est obligatoire "));
+				return JSonConverter.objectToJson(new Reponse("ko", "You should enter your mail "));
 			}
 			if (!IsPresent(prof.getUserPassword()) || (prof.getUserPassword().length()<6) ) {
-				return JSonConverter.objectToJson(new Reponse("ko", "getUserPassword  est obligatoire "));
+				return JSonConverter.objectToJson(new Reponse("ko", "You should enter a password "));
 			}
 			if (!IsPresent(prof.getUserAddress())) {
-				return JSonConverter.objectToJson(new Reponse("ko", "UserAddress  est obligatoire "));
+				return JSonConverter.objectToJson(new Reponse("ko", "You should enter your adress "));
 			}
 			if (!IsPresent(prof.getUserPhone())) {
-				return JSonConverter.objectToJson(new Reponse("ko", "getUserPhone  est obligatoire "));
+				return JSonConverter.objectToJson(new Reponse("ko", "You should enter your phone number "));
 			}
 			if (!IsPresent(prof.getUserPicture())) {
-				return JSonConverter.objectToJson(new Reponse("ko", "getUserPicture  est obligatoire "));
+				return JSonConverter.objectToJson(new Reponse("ko", "You should select a picture "));
 			}
 
 			prof.setUserKey(GenerateKey());
 
 			if (!IsPresent(prof.getUserKey())) {
-				return JSonConverter.objectToJson(new Reponse("ko", "erreur lors de generation de key  est obligatoire "));
+				return JSonConverter.objectToJson(new Reponse("ko", "Error in key generation"));
 			}
 			
 			return JSonConverter.objectToJson(DAO.Registration(prof));
@@ -56,10 +56,10 @@ public class ProfilServices {
 				
 
 				if (!IsPresent(prof.getUserPassword()) || (prof.getUserPassword().length()<6) ) {
-					return JSonConverter.objectToJson(new Reponse("ko", "getUserPassword  est obligatoire "));
+					return JSonConverter.objectToJson(new Reponse("ko", "You should enter your password"));
 				}
 				if (!IsPresent(prof.getUserMail())) {
-					return JSonConverter.objectToJson(new Reponse("ko", "getUserMail  est obligatoire "));
+					return JSonConverter.objectToJson(new Reponse("ko", "You should enter your mail"));
 				} 
 				
 				Reponse reponse = DAO.Login(prof);

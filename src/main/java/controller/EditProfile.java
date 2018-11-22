@@ -43,7 +43,7 @@ public class EditProfile extends HttpServlet {
         
         if(!AutorisationAcess.isTokenExist(request))
         {
-        	result = JSonConverter.objectToJson(new Reponse("ko", "Dec"));
+        	result = JSonConverter.objectToJson(new Reponse("ko", "Deconnexion"));
         }
         else
         {

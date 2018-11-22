@@ -41,7 +41,7 @@ public class Driving extends HttpServlet {
 
 //        Securisé avec le token rien ne passe sans le token valide
 		if (!AutorisationAcess.isTokenExist(request)) {
-			result = JSonConverter.objectToJson(new Reponse("ko", "Dec"));
+			result = JSonConverter.objectToJson(new Reponse("ko", "Deconnexion"));
 		} else {
 
 			// extraire les données qu'on a besoin id de user

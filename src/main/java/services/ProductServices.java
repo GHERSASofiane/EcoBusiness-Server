@@ -43,20 +43,20 @@ public class ProductServices {
 		}
 
 		if (!Pattern.matches("[a-zA-Z0-9\\s]+", product.getProductName())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "ProductName ne respecte pas la syntaxe"));
+			return JSonConverter.objectToJson(new Reponse("ko", "Your product name is not correct"));
 		}
 
 		if (!IsPresent(product.getProductDescription())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "ProductDescription  est obligatoire"));
+			return JSonConverter.objectToJson(new Reponse("ko", "Please enter a product description"));
 		}
 		if (!IsPresent(product.getProductPrice())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "ProductPrice  est obligatoire"));
+			return JSonConverter.objectToJson(new Reponse("ko", "Please enter a product price"));
 		}
 		if (!IsPresent(product.getUserId())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "UserId  est obligatoire"));
+			return JSonConverter.objectToJson(new Reponse("ko", "UserId can't be empty"));
 		}
 		if (!IsPresent(product.getProductPicture())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "ProductPicture  est obligatoire"));
+			return JSonConverter.objectToJson(new Reponse("ko", "Please, select a product picture"));
 		}
 //		Ajouter quelque information 
 		product.setProductDate(getDate());
@@ -72,7 +72,7 @@ public class ProductServices {
 
 //				Tester les données envoyé par le client parce qu'on fais pas confiance ;)
 		if (!IsPresent(id)) {
-			return JSonConverter.objectToJson(new Reponse("ko", "Pas d'identifiant pour la recherch "));
+			return JSonConverter.objectToJson(new Reponse("ko", "There is no identifar for research "));
 		}
 
 //				Passer à la couche qui communique avec La BDD
@@ -85,7 +85,7 @@ public class ProductServices {
 
 //									Tester les données envoyé par le client parce qu'on fais pas confiance ;)
 		if (!IsPresent(id)) {
-			return JSonConverter.objectToJson(new Reponse("ko", "Pas d'identifiant pour la validation "));
+			return JSonConverter.objectToJson(new Reponse("ko", "There is no identifar for research validation "));
 		}
 
 //									Passer à la couche qui communique avec La BDD
@@ -98,7 +98,7 @@ public class ProductServices {
 
 //														Tester les données envoyé par le client parce qu'on fais pas confiance ;)
 		if (!IsPresent(id)) {
-			return JSonConverter.objectToJson(new Reponse("ko", "Pas d'identifiant pour la validation "));
+			return JSonConverter.objectToJson(new Reponse("ko", "No identifier for history "));
 		}
 
 //														Passer à la couche qui communique avec La BDD
@@ -110,7 +110,7 @@ public class ProductServices {
 
 //				Tester les données envoyé par le client parce qu'on fais pas confiance ;)
 		if (!IsPresent(id)) {
-			return JSonConverter.objectToJson(new Reponse("ko", "Pas d'identifiant pour la recherch "));
+			return JSonConverter.objectToJson(new Reponse("ko", "There is no identifar for driving "));
 		}
 
 //				Passer à la couche qui communique avec La BDD
@@ -122,7 +122,7 @@ public class ProductServices {
 
 //		Tester les données envoyé par le client parce qu'on fais pas confiance ;)
 		if (!IsPresent(id)) {
-			return JSonConverter.objectToJson(new Reponse("ko", "Pas d'identifiant pour la supprission "));
+			return JSonConverter.objectToJson(new Reponse("ko", "There is no identifar for deletion "));
 		}
 
 //		Passer à la couche qui communique avec La BDD
@@ -134,19 +134,19 @@ public class ProductServices {
 
 //		Tester les données envoyé par le client parce qu'on fais pas confiance ;)
 		if (!IsPresent(product.getProductName())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "ProductName est obligatoire"));
+			return JSonConverter.objectToJson(new Reponse("ko", "You should enter a product name"));
 		}
 		if (!IsPresent(product.getProductDescription())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "ProductDescription  est obligatoire"));
+			return JSonConverter.objectToJson(new Reponse("ko", "You should enter a product description"));
 		}
 		if (!IsPresent(product.getProductPrice())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "ProductPrice  est obligatoire"));
+			return JSonConverter.objectToJson(new Reponse("ko", "You should enter a product price"));
 		}
 		if (!IsPresent(product.getUserId())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "UserId  est obligatoire"));
+			return JSonConverter.objectToJson(new Reponse("ko", "you should enter a userId"));
 		}
 		if (!IsPresent(product.getProductPicture())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "ProductPicture  est obligatoire"));
+			return JSonConverter.objectToJson(new Reponse("ko", "You should select a product picture"));
 		}
 
 //		Passer à la couche qui communique avec La BDD
@@ -158,7 +158,7 @@ public class ProductServices {
 
 //		Tester les données envoyé par le client parce qu'on fais pas confiance ;)
 		if (!IsPresent(productId)) {
-			return JSonConverter.objectToJson(new Reponse("ko", "productId est obligatoire"));
+			return JSonConverter.objectToJson(new Reponse("ko", "There is no productId"));
 		}
 
 //		Passer à la couche qui communique avec La BDD
@@ -170,19 +170,19 @@ public class ProductServices {
 
 //		Tester les données envoyé par le client parce qu'on fais pas confiance ;)
 		if (!IsPresent(reserv.getReservationDate())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "getReservationDate  est obligatoire "));
+			return JSonConverter.objectToJson(new Reponse("ko", "You should choose a date for product recuperation"));
 		}
 		if (!IsPresent(reserv.getReservationMessage())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "getReservationMessage  est obligatoire "));
+			return JSonConverter.objectToJson(new Reponse("ko", "You shoukd enter a message "));
 		}
 		if (!IsPresent(reserv.getReservationProduct())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "getReservationProduct  est obligatoire "));
+			return JSonConverter.objectToJson(new Reponse("ko", "getReservationProduct  is obligatory "));
 		}
 		if (!IsPresent(reserv.getReservationReceive())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "getReservationReceive  est obligatoire "));
+			return JSonConverter.objectToJson(new Reponse("ko", "getReservationReceive  is obligatory "));
 		}
 		if (!IsPresent(reserv.getReservationSend())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "getReservationSend  est obligatoire "));
+			return JSonConverter.objectToJson(new Reponse("ko", "getReservationSend  is obligatory "));
 		}
 
 //		Passer à la couche qui communique avec La BDD
@@ -194,7 +194,7 @@ public class ProductServices {
 
 //		Tester les données envoyé par le client parce qu'on fais pas confiance ;)
 		if (!IsPresent(id)) {
-			return JSonConverter.objectToJson(new Reponse("ko", "ID  est obligatoire "));
+			return JSonConverter.objectToJson(new Reponse("ko", "ID  is obligatory "));
 		}
 
 //		Passer à la couche qui communique avec La BDD
@@ -206,7 +206,7 @@ public class ProductServices {
 
 //		Tester les données envoyé par le client parce qu'on fais pas confiance ;)
 		if (!IsPresent(reserv.getProductId())) {
-			return JSonConverter.objectToJson(new Reponse("ko", "ID  est obligatoire "));
+			return JSonConverter.objectToJson(new Reponse("ko", "ID  is obligatory "));
 		}
 
 //		Passer à la couche qui communique avec La BDD

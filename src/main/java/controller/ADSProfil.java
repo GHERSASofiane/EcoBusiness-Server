@@ -51,11 +51,11 @@ public class ADSProfil extends HttpServlet {
 		 }
 		 else
 		 {
-			 obj = JSonConverter.objectToJson(new Reponse("ko", personne.getUserMail() + "not vailde"));
+			 obj = JSonConverter.objectToJson(new Reponse("ko", personne.getUserMail() + "Yout mail is not valid, please try again !"));
 		 }
 		 } catch(Exception e)
 		 {
-			 obj = JSonConverter.objectToJson(new Reponse("ko", personne.getUserMail() + "not vailde")); 
+			 obj = JSonConverter.objectToJson(new Reponse("ko", personne.getUserMail() + "Yout mail is not valid, please try again !")); 
 		 }
 		  
 		

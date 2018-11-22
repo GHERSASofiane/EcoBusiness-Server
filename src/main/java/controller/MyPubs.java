@@ -40,7 +40,7 @@ public class MyPubs extends HttpServlet {
 
 //        Securisé avec le token rien ne passe sans le token valide
 		if (!AutorisationAcess.isTokenExist(req)) {
-			result = JSonConverter.objectToJson(new Reponse("ko", "Dec"));
+			result = JSonConverter.objectToJson(new Reponse("ko", "Deconnexion"));
 		} else {
 
 			// Récuperer le ID de l'utilisateur

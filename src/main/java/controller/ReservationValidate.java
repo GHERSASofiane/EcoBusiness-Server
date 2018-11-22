@@ -43,7 +43,7 @@ public class ReservationValidate extends HttpServlet {
 
 //        Securisé avec le token rien ne passe sans le token valide
 		if (!AutorisationAcess.isTokenExist(request)) {
-			result = JSonConverter.objectToJson(new Reponse("ko", "Dec"));
+			result = JSonConverter.objectToJson(new Reponse("ko", "Deconnexion"));
 		} else {
 
 			// transférer les données de la requête en Json
