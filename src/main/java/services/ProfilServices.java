@@ -133,37 +133,37 @@ public class ProfilServices {
 		public JsonObject update(Personne prof)
 		{
 			if (!IsPresent(prof.getUserPassword()) || (prof.getUserPassword().length()<6) ) {
-				return JSonConverter.objectToJson(new Reponse("ko", "getUserPassword  est obligatoire "));
+				return JSonConverter.objectToJson(new Reponse("ko", "You should enter a password "));
 			}
 			
 			if (IsPresent(prof.getUserMail())) {
 				if(!EmailVerification.isAddressValid(prof.getUserMail()))
-					return JSonConverter.objectToJson(new Reponse("ko", prof.getUserMail() + " est invalide"));
+					return JSonConverter.objectToJson(new Reponse("ko", prof.getUserMail() + ": This mail is not valid"));
 			}
 			else
-			return JSonConverter.objectToJson(new Reponse("ko", "getUserMail  est obligatoire "));
+			return JSonConverter.objectToJson(new Reponse("ko", "You should enter a mail "));
 			
 			if (!IsPresent(prof.getUserName())) {
-				return JSonConverter.objectToJson(new Reponse("ko", "getUserName  est obligatoire "));
+				return JSonConverter.objectToJson(new Reponse("ko", "You should enter your name"));
 			}
 			else
 				if(prof.getUserName().length() < 4)
-					return JSonConverter.objectToJson(new Reponse("ko", "UserName doit avoir au minimum 4 caracteres"));
+					return JSonConverter.objectToJson(new Reponse("ko", "Name should have at least 4 caracters"));
 					
 			
 			if (!IsPresent(prof.getUserPhone())) {
-				return JSonConverter.objectToJson(new Reponse("ko", "getUserPhone  est obligatoire "));
+				return JSonConverter.objectToJson(new Reponse("ko", "You should enter a phone number "));
 			} 
 			else
 				if(prof.getUserPhone().length() < 8)
-					return JSonConverter.objectToJson(new Reponse("ko", "UserPhone doit avoir au minimum 8 caracteres"));
+					return JSonConverter.objectToJson(new Reponse("ko", "Phone number should have at least 8 caracters"));
 			
 			if (!IsPresent(prof.getUserPicture())) {
-				return JSonConverter.objectToJson(new Reponse("ko", "getUserPicture  est obligatoire "));
+				return JSonConverter.objectToJson(new Reponse("ko", "You should select a product picture"));
 			} 
 			
 			if (!IsPresent(prof.getUserAddress())) {
-				return JSonConverter.objectToJson(new Reponse("ko", "getUserAddress  est obligatoire "));
+				return JSonConverter.objectToJson(new Reponse("ko", "You should enter your adress"));
 			} 
 			
 			prof.setUserKey(GenerateKey());
