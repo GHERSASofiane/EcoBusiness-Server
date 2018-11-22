@@ -42,7 +42,7 @@ public class AdDetails extends HttpServlet {
 //        Securisé avec le token rien ne passe sans le token valide
         if(!AutorisationAcess.isTokenExist(request))
         {
-        	result = JSonConverter.objectToJson(new Reponse("ko", "Dec"));
+        	result = JSonConverter.objectToJson(new Reponse("ko", "Deconnexion"));
         }
         else
         {

@@ -63,10 +63,10 @@ public class ProductDAO {
 
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "Erreur sur le serveur");
+			return new Reponse("ko", "Server error");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "Erreur sur le serveur");
+			return new Reponse("ko", "Server error");
 		}
 		return new Reponse("ok", res);
 	}
@@ -90,13 +90,13 @@ public class ProductDAO {
 
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "votre produit n'a pas pu etre ajouter");
+			return new Reponse("ko", "Couldn't add your product");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "votre produit n'a pas pu etre ajouter");
+			return new Reponse("ko", "Couldn't add your product");
 		}
 
-		return new Reponse("ok", " votre produit est ajouter avec succes ");
+		return new Reponse("ok", "Your product was added");
 
 	}
 
@@ -133,10 +133,10 @@ public class ProductDAO {
 
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "Erreur sur le serveur");
+			return new Reponse("ko", "Server error");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "Erreur sur le serveur");
+			return new Reponse("ko", "Server error");
 		}
 		return new Reponse("ok", res);
 	}
@@ -157,13 +157,13 @@ public class ProductDAO {
 
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "votre produit n'a pas pu etre suprimmer");
+			return new Reponse("ko", "Couldn't delete your product");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "votre produit n'a pas pu etre suprimmer");
+			return new Reponse("ko", "Couldn't delete your product");
 		}
 
-		return new Reponse("ok", "votre produit est supprime avec succes");
+		return new Reponse("ok", "Your product was deleted");
 
 	}
 
