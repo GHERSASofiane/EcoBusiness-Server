@@ -96,8 +96,8 @@ public class ProfilDAO {
 //	login
 	public Reponse Login(Personne prof) {
 
-		if( !isMailExiste(prof.getUserMail()) ) return new Reponse("ko", "le mail n'existe deja "); 
-		if( !isMailPass(prof.getUserMail(), prof.getUserPassword()) ) return new Reponse("ko", "le mot de passe est incorrect "); 
+		if( !isMailExiste(prof.getUserMail()) ) return new Reponse("ko", "This mail doesn't exist"); 
+		if( !isMailPass(prof.getUserMail(), prof.getUserPassword()) ) return new Reponse("ko", "Your password is incorrect"); 
 		
 		Personne personne = new Personne();
 		
@@ -128,10 +128,10 @@ public class ProfilDAO {
 
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "Erreur sur le serveur");
+			return new Reponse("ko", "Server error");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "Erreur sur le serveur");
+			return new Reponse("ko", "Server error");
 		}
 		
 		return new Reponse("ok", personne);
