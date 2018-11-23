@@ -322,10 +322,10 @@ public class ProductDAO {
 
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "Erreur sur le serveur");
+			return new Reponse("ko", "Server error");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "Erreur sur le serveur");
+			return new Reponse("ko", "Server error");
 		}
 
 		return new Reponse("ok", TabRes);
@@ -365,13 +365,13 @@ public class ProductDAO {
 
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "votre Validation n'a pas pu etre effectuer");
+			return new Reponse("ko", "validation failed");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "votre Validation n'a pas pu etre effectuer");
+			return new Reponse("ko", "validation failed");
 		}
 
-		return new Reponse("ok", "L'operation de Validation est bien passer :) :) ");
+		return new Reponse("ok", "You validate your product booking:) ");
 
 	}
 
@@ -380,7 +380,7 @@ public class ProductDAO {
 
 		// tester si l'annance est toujours disponible pour la Concurrence
 		if (!isProductDis(id)) {
-			return new Reponse("ko", "l'annance n'est plus disponible");
+			return new Reponse("ko", "Product is no longer available");
 		}
 
 		try {
@@ -398,13 +398,13 @@ public class ProductDAO {
 
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "votre Validation n'a pas pu etre valider");
+			return new Reponse("ko", "Couldn't validate your purchase");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "votre Validation n'a pas pu etre valider");
+			return new Reponse("ko", "Couldn't validate your purchase");
 		}
 
-		return new Reponse("ok", "L'operation de Validation est bien passer :) :) ");
+		return new Reponse("ok", "Congrats: your purchase is done:) ");
 
 	}
 
@@ -445,10 +445,10 @@ public class ProductDAO {
 
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "Erreur sur le serveur ");
+			return new Reponse("ko", "Server error");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "Erreur sur le serveur ");
+			return new Reponse("ko", "Server error ");
 		}
 		return new Reponse("ok", res);
 	}
@@ -493,10 +493,10 @@ public class ProductDAO {
 
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "Erreur sur le serveur ");
+			return new Reponse("ko", "Server error");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "Erreur sur le serveur ");
+			return new Reponse("ko", "Server error");
 		}
 		return new Reponse("ok", res);
 	}
