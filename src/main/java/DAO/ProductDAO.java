@@ -269,13 +269,13 @@ public class ProductDAO {
 
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "votre Reservation n'a pas pu etre ajouter");
+			return new Reponse("ko", "Booking failed");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return new Reponse("ko", "votre Reservation n'a pas pu etre ajouter");
+			return new Reponse("ko", "Booking failed");
 		}
 
-		return new Reponse("ok", "votre Reservation est envoyer avec succes");
+		return new Reponse("ok", "you have reserved the product ");
 
 	}
 
